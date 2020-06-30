@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'trades_follower_list' %}">Follower Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>created</td>
+    <td>risk</td>
+    <td>strategy</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.created }}</td>
+    <td>{{ object.risk }}</td>
+    <td>{{ object.strategy }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'trades_follower_create' %}">Create new Follower</a>
+{% endblock %}

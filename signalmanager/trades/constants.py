@@ -1,0 +1,34 @@
+
+PENDING,ACTIVE,CANCELED,FAILED,DELETED,CLOSED,UNKNOWN = range(7)
+
+
+ORDER_STATUS_CHOICES = (
+        (CANCELED, 'Canceled'),
+        (PENDING, 'Pending'),
+        (CLOSED, 'Closed'),
+        (ACTIVE, 'Active'),
+        (DELETED, 'Deleted'),
+        (UNKNOWN, 'Unknown'),
+    )
+
+
+STG_SIZE_STOPLOSS,STG_SIZE_RISK,STG_SIZE_FIX,STG_SIZE_MULTIPLIER = range(4)
+
+STG_DIRECTION_ALL,STG_DIRECTION_SHORT,STG_DIRECTION_LONG = range(0,3)
+
+STG_SIZE_TYPE = (
+        (STG_SIZE_STOPLOSS, 'Stoploss'),
+        (STG_SIZE_RISK, 'Risk'),
+        (STG_SIZE_FIX, 'Fix'),
+        (STG_SIZE_MULTIPLIER, 'Multiplier'),
+    )
+STG_DIRECTION = (
+        (STG_DIRECTION_ALL, 'All'),
+        (STG_DIRECTION_LONG, 'Long'),
+        (STG_DIRECTION_SHORT, 'Short'),
+    )
+
+
+BUY , SELL ,BUYLIMIT , SELLLIMIT ,BUYSTOP, SELLSTOP = range(6)
+STG_SIZE_STOPLOSS,STG_SIZE_RISK,STG_SIZE_FIX,STG_SIZE_MULTIPLIER = range(4)
+LOTS_UNITS=100000

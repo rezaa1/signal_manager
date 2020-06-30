@@ -1,0 +1,16 @@
+#!/bin/bash
+# $1 : trade-mnt/trade-queue
+cd /opt/signal/signalmanager/
+. /opt/signal/env/bin/activate
+
+now=`date +%y%m%d-%H%M%S`
+
+python manage.py check >> /tmp/pushme-error 2>&1
+chk=$?
+if [ $chk -eq 0 ]; then
+    /etc/mod_wsgi-express-80/apachectl restart
+     mv logs/log-trade-$1* logs/old/
+    setsid python manage.py process_tasks --queue $1 --duration 0 --sleep $2 > logs/log-trade-$1-$now.log 2>&1 & 
+ #   setsid python manage.py process_tasks --queue trade-queue --duration 0 --sleep 2 > log-trade-queue.log 2>&1  &
+    ps -ef| grep manage.py  | grep $1 | grep $$ | awk '{print $2}' > /var/run/signal-$1.pid
+fi

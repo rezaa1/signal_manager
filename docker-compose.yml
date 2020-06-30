@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: ${SQL_HOST}
+    image: postgres
+    environment:
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
+      - POSTGRES_DB=${SQL_DB}
+      - POSTGRES_PORT=${SQL_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - ${SQL_PORT}
+    restart: always
+
+
+  web:
+    container_name: todo_backend
+    build: ./app
+    env_file:
+      - ./.env
+    expose:
+      - 8000
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:

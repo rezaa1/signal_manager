@@ -1,0 +1,641 @@
+/t
+\t
+\t
+\d
+select * from snippets_snippet;
+select * from snippets_snippet;
+select * from snippets_snippet_id_seq 
+;
+select * from django_migrations;
+select * from django_session 
+;
+select * from auth_user;
+select * from auth_user_groups
+;
+select *  from auth_user_user_permissions;
+select *  from auth_user;
+select * from authtoken_token ;
+create database signals
+;
+?
+help
+\?
+\u
+\d
+df
+?
+\d
+select * from snippets_snippet;
+select * from snippets_snippet;
+select * from snippets_snippet;
+delete from snippets_snippet where id=16;
+delete from snippets_snippet where id=15;
+delete from snippets_snippet where id=14;
+delete from snippets_snippet where id=1;
+?
+\d
+drop table snippets_snippet ;
+drop table snippets_snippet ;
+\d
+\t sn
+select * from snippets_snippet;
+\?
+\dS+ snippets_snippet
+\dS+ snippets_snippet
+alter table snippets_snippet alter COLUMN order_status char(10);
+alter table snippets_snippet alter COLUMN order_status type char(10);
+\dS+ snippets_snippet
+select * from snippets_snippet;
+\t
+?
+\d
+drop table snippets_snippet ;
+drop table snippets_snippet ;
+\d
+\d
+\d snippets_snippet
+\t 
+\d
+\?
+\d snippets_snippet
+\d snippets_snippet
+alter table snippets_snippet alter message_id(text);
+alter table snippets_snippet alter message_id text;
+alter table snippets_snippet alter message_id as text;
+alter table snippets_snippet alter message_id type text 
+;
+alter table snippets_snippet alter message_id type text ;
+alter table snippets_snippet alter message_id set type text ;
+alter table snippets_snippet alter message_id drop 
+;
+drop  table snippets_snippet ;
+\d snippets_snippet
+select * from snippets_snippet
+;
+select * from snippets_snippet
+;
+?
+help
+/d
+/t trades
+\/
+\t
+\d
+\t trades_trades
+\t trades_trades;
+\t
+\d
+\d trades_trades
+\d snippets_snippet
+\d 
+\d trades_trades
+select * from trades_trades;
+drop table trad
+\d 
+select * from snippets_snippet;
+\d
+\d
+select * from trades_trades;'\
+select * from trades_trades;'\
+drop table trades_trades ;
+select * from trades_trades;
+select * from snippets_snippet;
+select * from snippets_snippet where owner_id=1;
+select * from snippets_snippet where owner_id=1 and order_status <> "Deleted";
+select * from snippets_snippet where owner_id=1 and order_status <> 'Deleted';
+select * from snippets_snippet where owner_id=1 and order_status <> 'Deleted';
+select * from snippets_snippet;
+\d
+select * from django_site
+;
+select * from tests_author;
+select * from telegrambot_authtoken ;
+select * from telegrambot_chat l
+;
+select * from telegrambot_message ;
+select * from telegrambot_user ;
+\d
+\d
+/d
+\d
+\d
+select * from accounts_profile;
+select * from auth_user;
+\d
+select * from accounts_profile
+;
+select * from auth_user;
+delete from auth_user where id =2 ;
+select * from authtoken_token ;
+delete from authtoken_token where id =2 ;
+delete from authtoken_token where iuser_id =2 ;
+delete from authtoken_token where user_id =2 ;
+delete from auth_user where id =2 ;
+\d
+select * from accounts_profile;
+select * from auth_user;
+select * from auth_user;
+delete from authtoken_token where user_id =2 ;
+delete from authtoken_token where user_id =5 ;
+delete from auth_user where id =5 ;
+select * from auth_user;
+delete from authtoken_token where user_id =7 ;
+delete from auth_user where id =7 ;
+select * from auth_user;
+select * from auth_user;
+select * from auth_user;
+select * from auth_user;
+select * from auth_user;
+select * from accounts_profile;
+select * from accounts_profile;
+select * from auth_user;
+delete from auth_user where id =8;
+select * from "authtoken_token";
+delete from "authtoken_token" where user_id=8;
+delete from auth_user where id =8;
+select * from auth_user;
+select * from accounts_profile;
+delete from auth_user where id =9;
+delete from "authtoken_token" where user_id=9;
+delete from auth_user where id =9;
+select * from accounts_profile;
+delete from accounts_profile ;
+delete from auth_user where id =9;
+select * from accounts_profile;
+delete from "authtoken_token" where user_id=10;
+delete from accounts_profile ;
+delete from auth_user where id =10;
+select * from accounts_profile;
+delete from accounts_profile ;
+select * from authtoken_token 
+;
+delete from authtoken_token where user_id = 12
+select * from authtoken_token 
+;
+delete from authtoken_token where user_id =12;
+delete from authtoken_token where user_id =11;
+delete from auth_user where id > 1
+;
+select * from accounts_profile;
+delete from accounts_profile l
+;
+delete from authtoken_token where user_id > 1
+;
+delete from auth_user id >1;
+delete from auth_user where id >1
+;
+select * from accounts_profile;
+delete from authtoken_token where user_id > 1
+;
+select * from accounts_profile;
+delete from accounts_profile l
+;
+delete from auth_user where id >1
+;
+select * from signals_bot;
+drop table signals_bot ;
+\d
+drop table signals_bot ;
+\d
+select * from accounts_profile;
+\d
+select * from signals_channel;
+drop table signals_channel;
+drop table signals_channel_id_seq;
+select * from signals_channel;
+\d
+alter table signals_channel alter COLUMN tcid set channel_id;
+alter table signals_channel  rename COLUMN tcid to channel_id;
+\d
+select * from signals_bot;
+select * from authtoken_token ;
+select
+alter table signals_messagerecord  rename COLUMN mid to message_id;
+\d
+select * from signals_messagerecord;
+select * from signals_signals;
+select * from signals_signal;
+delete from signals_signal where id=20
+s;
+delete from signals_signal where id=24;
+delete from signals_signal where id=20;
+select * from signals_messagerecord;
+\d
+select * from signals_bot;
+select * from signals_channel;
+delete from signals_channel where id =2;
+select * from signals_channel;
+select * from signals_channel;
+update signals_channel type="Free";
+update signals_channel set type="Free";
+update signals_channel SET type = DEFAULT
+;
+update signals_channel SET type = 'Free';
+update signals_channel SET type = 0;
+\d
+insert into trades_broker values ( ;
+)
+;
+select * from trades_broker;
+insert into trades_broker values ( "OANDA");
+insert into trades_broker values ( 'OANDA');
+insert into trades_broker (name) values ( 'OANDA');
+insert into trades_broker (name,description) values ( 'OANDA','oanda');
+select * from trades_accounttype
+;
+insert into trades_accounttype (broker_id,name,description) values ( 1,'V20','oanda');
+select * from trades_broker;
+insert into trades_accounttype (broker_id,name,description) values ( 2,'V20','oanda');
+\d
+select * from trads_account;
+select * from trades_account;
+insert into trades_accounttype (account_no,type_id,broker_id,description,owner_id) values ( '100-100-100',1,2,'test',16);
+insert into trades_accounttype (account_no,type_id,broker_id,description,owner_id) values ( '100-100-100',2,2,'test',16);
+select * from trades_accounttype;
+select * from trades_account;
+\d trades_account
+select * from trades_account;
+insert into trades_accounttype (account_no,type_id,broker_id,description,owner_id) values ( '100100100',2,2,'test',16);
+\d trades_accounttype
+select * from trades_accounttype
+;
+insert into trades_accounttype (account_no,type_id,broker_id,description,owner_id) values ( '100100100',2,2,'test',16);
+insert into trades_accounttype ("account_no","type_id",broker_id,description,owner_id) values ( '100100100',2,2,'test',16);
+insert into trades_accounttype ("account_no","type_id",broker_id,description,owner_id) values ( '100100100',2,2,'test',16);
+insert into trades_account ("account_no","type_id",broker_id,description,owner_id) values ( '100100100',2,2,'test',16);
+insert into trades_account ("account_no","type_id",broker_id,description,owner_id,created) values ( '100100100',2,2,'test',16,'2019-01-01');
+\d trades_follower;
+select * from trades_account;
+select * from signals_channel;
+\d
+select * from trades_follower;
+insert into trades_account (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',1,3,1,16);
+\d trades_follower
+select * from trades_account;
+insert into trades_account (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',2,3,1,16);
+insert into trades_follower (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',2,3,1,16);
+\d trades_strategy;
+insert into trades_strategy (name,description) values ( 'MoMange1','test');
+insert into trades_follower (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',2,3,1,16);
+select * from trades_account;
+insert into trades_account ("account_no","type_id",broker_id,description,owner_id,created) values ( '2002-0100',2,2,'test',16,'2019-01-01');
+insert into trades_follower (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',3,2,1,16);
+select * from trades_ch;
+select * from trades_channel;
+select * from signals_channel;
+insert into trades_follower (created,account_id,channel_id,strategy_id,owner_id) values ('2019-01-01',3,1,1,16);
+update signals_channel SET type = 1
+;
+update signals_channel SET type = 0;
+update signals_channel SET type = 1 where id =1;
+select * from signals_channel;
+df
+;
+select * from trades_trade;
+\d trades_trade
+select * from signals_signal;
+select order_type from signals_signal; 
+select order_type from signals_signal sort by 1; 
+select order_type from signals_signal sort  1; 
+select order_type from signals_signal sort order_type; 
+select order_type from signals_signal order by 1
+;
+select * from trades_account;
+select * from trades_account;
+select * from trades_account;
+select * from trades_account;
+drop table trades_account;
+\d trades_account
+alter table trades_account add column token varying(100);
+alter table trades_account add column token character varying(20) ;
+alter table trades_account alter column token character varying(20) ;
+alter table trades_account remove column token;
+alter table trades_account delete  column token;
+alter table trades_account drop  column token;
+alter table trades_account alter column token character varying(100) ;
+alter table trades_account add column token character varying(100) ;
+select * from signals_channel;
+delete from signals_channel where id =3;
+select * from trades_follower;
+delete from trades_follower where id =2;
+delete from signals_channel where id =3;
+\d
+select * from signals_bot;
+select * from background_task;
+select id,task_name,task_params,run_at from background_task;
+select queue,id,task_name,task_params,run_at from background_task;
+select queue,id,task_name,run_at from background_task;
+select queue,id,task_name,run_at from background_task_completedtask;
+select queue,id,task_name,run_at from background_task;
+delete from background_task;
+select queue,id,task_name,run_at from background_task;
+delete from background_task_completedtask ;
+select * from trades_follower;
+select * from trades_account;
+update trades_account ;
+select * from trades_accounttype;
+select * from trades_broker;
+select * from trades_accounttype;
+\d
+select * from trades_account
+;
+update  trades_account SET account_no = '6207e967d6ee40aad284e1f856139755-1462bb1f9d5c4e516c2a2e07c3e0e1d5' where id =3
+;
+update  trades_account SET token = '6207e967d6ee40aad284e1f856139755-1462bb1f9d5c4e516c2a2e07c3e0e1d5' where id =3
+;
+update  trades_account SET account_no = '101-001-8394451-002' where id =3
+;
+update  trades_account SET token = '6207e967d6ee40aad284e1f856139755-1462bb1f9d5c4e516c2a2e07c3e0e1d5' where id =2
+;
+update  trades_account SET account_no = '101-001-8394451-001' where id =2
+;
+\d trades_
+\d trades_*
+\d trades_accounttype
+select * from trades_accounttype
+;
+alter table trades_accounttype add column environment;
+\d trades_accounttype
+alter table trades_accounttype add column environment(character);
+alter table trades_accounttype add column environment(character);
+alter table trades_accounttype add column environment varying(15);
+alter table trades_accounttype add column environment vary(15);
+alter table trades_accounttype add column environment characther  varying(15);
+alter table trades_accounttype add column environment character varying(15);
+\d trades_accounttype
+select * from trades_accounttype
+;
+update  trades_accounttype SET environment='practice' where id =2
+;
+update  trades_accounttype SET name ='V20_DEMO' where id =2
+;
+select * from trades_accounttype
+;
+update  trades_accounttype SET description ='oanda_V20_DEMO' where id =2
+;
+select * from trades_accounttype
+;
+select * from signals_channel;
+:q
+select * from signals_signal;
+select * from signals_signal;
+\d signals_signal
+select id,order_symbol,channel_type_free,channel_type_paid from signals_signal;
+\d signals_channel
+\d trades_follower
+\d signals_signal
+select * from signals_channel;
+update signals_channel set type = 'FREE' where id =1;
+select * from signals_channel;
+name = models.CharField(max_length=20)
+    description = models.TextField(blank=True)
+    stoploss = models.BooleanField(default=True)
+    manage_trade = models.BooleanField(default=False)
+    break_even = models.IntegerField(blank=True)
+    close_half = models.IntegerField(blank=True)
+;
+\d trades_strategy
+drop table trades_strategy l
+;
+drop table trades_strategy ;
+alter table trades_strategy add column stoploss BOOLEAN ;
+alter table trades_strategy drop column stoploss ;
+alter table trades_strategy add column stoploss BOOLEAN default=true ;
+alter table trades_strategy add column stoploss BOOLEAN default TRUE ;
+alter table trades_strategy add column break_even BOOLEAN default TRUE ;
+alter table trades_strategy add column close_half BOOLEAN default TRUE ;
+alter table trades_strategy add column manage_trade BOOLEAN default FALSE ;
+\d trades_strategy
+select  * from trades_strategy;
+alter table trades_follower add column risk int default 1 ;
+alter table trades_follower drop column risk  ;
+alter table trades_follower add column risk int default 1 not null;
+;
+select * from trades_follower;
+select * from trades_account;
+select * from trades_account;
+use
+\d
+\d
+select * from symbols;
+select * from symbolvar;
+select * from symbols;
+COPY symbols TO '/tmp/elements.csv' DELIMITER ',' CSV HEADER;
+select * from symbols;
+select * from symbolvar;
+\d
+select * from symbolvar;
+select * from symbols;
+\d
+\d trades_account
+\d oanda_instrument
+;
+alter table oanda_instrument rename COLUMN pipfactor to pipFactor;
+alter table oanda_instrument rename COLUMN pipfactor to p2ipFactor;
+alter table oanda_instrument rename COLUMN p2ipFactor to pipFactor;
+\d
+\d oanda_instrument
+alter table oanda_instrument rename COLUMN pipfactor to p2ipFactor;
+alter table oanda_instrument rename COLUMN p2ipFactor to 'pipFactor';
+alter table oanda_instrument rename COLUMN pipfactor to "pipFactor";
+alter table oanda_instrument rename COLUMN p2ipfactor to "pipFactor";
+\d oanda_instrument
+ alter table oanda_instrument add column symbol vary(20)
+;
+ alter table oanda_instrument add column symbol varying(20);
+\d oanda_instrument
+ alter table oanda_instrument add column symbol char varying(20);
+select * from oanda_instrument
+;
+\copy symbolvar to '/filename.csv’ csv header
+;
+\copy symbolvar to '\filename.csv’ csv header
+select * from symbol;
+select * from symbols
+;
+\copy symbols to '\symbols.csv’ csv header
+\copy symbols to 'symbols.csv’ csv header
+\copy symbols to s.csv CSV HEADER 
+select * from signals_signal where id = 76;
+\d oanda_instrument
+CREATE TABLE symbols (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL,
+    oanda character varying(15)
+);
+ALTER TABLE public.symbols OWNER TO postgres;
+--
+-- Name: symbols_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE symbols_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER TABLE public.symbols_id_seq OWNER TO postgres;
+;
+COPY persons(first_name,last_name,dob,email) 
+FROM 'C:\tmp\persons.csv' DELIMITER ',' CSV HEADER;
+select * from symbols;
+copy symbols(name,oanda) FROM c.csv DELIMITER ',' CSV HEADER;
+copy symbols(name,oanda) FROM s.csv DELIMITER ',' CSV HEADER;
+copy symbols(name,oanda) FROM 's.csv' DELIMITER ',' CSV HEADER;
+copy symbols(name,oanda) FROM '/root/dj/signalmanager/s.csv' DELIMITER ',' CSV HEADER;
+copy symbols(name,oanda) FROM 's.csv' DELIMITER ',' CSV HEADER;
+copy symbols(name,oanda) FROM '/tmp/s.csv' DELIMITER ',' CSV HEADER;
+select * from symbols;
+copy symbols(name,oanda) FROM '/tmp/s.csv' DELIMITER ',' CSV HEADER;
+copy symbols(id,name,oanda) FROM '/tmp/s.csv' DELIMITER ',' CSV HEADER;
+select * from symbols;
+update oanda_instrument set symbol = select name from symbols where symbols.oanda = oanda_instrument=name 
+;
+update oanda_instrument set symbol =sq.name from ( select name from symbols where symbols.oanda = oanda_instrument=name 
+) as sq;
+update oanda_instrument set symbol =sq.name from ( select name from symbols where symbols.oanda = oanda_instrument.name 
+) as sq;
+update oanda_instrument set symbol =sq.name from symbols sq where symbols.oanda = oanda_instrument.name 
+) as sq;
+update oanda_instrument set symbol =sq.name from symbols sq where symbols.oanda = oanda_instrument.name 
+;
+update oanda_instrument set symbol =sq.name from symbols sq where sq.oanda = oanda_instrument.name 
+;
+select * from oanda_instrument;
+\d trades_strategy
+\d trades_follower;
+\copy symbolvar to symvar.csv csv header
+CREATE TABLE symbolmap (
+    id integer NOT NULL,
+    symbol_id integer NOT NULL,
+    name character varying(15) NOT NULL
+);
+ALTER TABLE public.symbolmap OWNER TO postgres;
+--
+-- Name: symbolmap_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE symbolmap_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER TABLE public.symbolmap_id_seq OWNER TO postgres;
+--
+-- Name: symbolmap_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+ALTER SEQUENCE symbolmap_id_seq OWNED BY symbolmap.id;
+--
+-- Name: symbolmap_symbol_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE symbolmap_symbol_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER TABLE public.symbolmap_symbol_id_seq OWNER TO postgres;
+--
+-- Name: symbolmap_symbol_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+ALTER SEQUENCE symbolmap_symbol_id_seq OWNED BY symbolmap.symbol_id;
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY symbols ALTER COLUMN id SET DEFAULT nextval('symbols_id_seq'::regclass);
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY symbolmap ALTER COLUMN id SET DEFAULT nextval('symbolmap_id_seq'::regclass);
+--
+-- Name: symbol_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY symbolmap ALTER COLUMN symbol_id SET DEFAULT nextval('symbolmap_symbol_id_seq'::regclass);
+COPY symbolmap (id, symbol_id, name) FROM stdin;
+bolmap_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('symbolmap_id_seq', 134, true);
+--
+-- Name: symbolmap_symbol_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('symbolmap_symbol_id_seq', 1, false);
+ALTER TABLE ONLY symbolmap
+    ADD CONSTRAINT symbolmap_name_key UNIQUE (name);
+--
+-- Name: symbolmap_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+--
+ALTER TABLE ONLY symbolmap
+    ADD CONSTRAINT symbolmap_pkey PRIMARY KEY (id);
+--
+-- Name: symbolmap_symbol_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY symbolmap
+    ADD CONSTRAINT symbolmap_symbol_id_fkey FOREIGN KEY (symbol_id) REFERENCES symbols(id);
+;
+select * from symbolmap;
+COPY symbolmap (id, symbol_id, name) FROM stdin;
+COPY symbolmap (id, symbol_id, name) FROM stdin;
+drop table symbolmap ;
+select * from symbolvar;
+select name,symbol  from symbolvar , symbols ;
+select symbolvar.name,symbol  from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select symbolvar.name,symbols.name  from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select symbolvar.name,symbols.name symbol  from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select symbolvar.name,symbols.name symbol  from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select * from symbolvar;
+select symbolvar.name,symbols.name symbol  from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select symbolvar.name symbol,symbols.name   from symbolvar , symbols where symbolvar.symbol_id = symbols.id ;
+select * from symbol
+CREATE TABLE symbolmap (
+    id integer NOT NULL,
+    symbol_id integer NOT NULL,
+    name character varying(15) NOT NULL
+);
+drop table symbolmap
+;
+CREATE TABLE symbolmap (
+    symbol_name character varying(15) NOT NULL,
+    alter_name character varying(15) NOT NULL
+);
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+select * from symbolmap 
+;
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+DAX30,DE30
+\.
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+;
+COPY symbolmap (symbol_name,alter_name) FROM stdin;
+COPY symbolmap (symbol_name,alter_name) FROM stdin WITH;
+COPY symbolmap (symbol_name,alter_name) FROM stdin WITH (FORMAT csv);
+select * from symbolmap 
+;
+delete from symbolmap ;
+COPY symbolmap (symbol_name,alter_name) FROM stdin WITH (FORMAT csv);
+select * from symbolmap group by;
+select * from symbolmap ;
+ALTER TABLE the_table ADD CONSTRAINT constraint_name UNIQUE (thecolumn);
+ALTER TABLE symbolmap ADD CONSTRAINT constraint_name UNIQUE (symbol_name);
+COPY symbolmap (symbol_name,alter_name) FROM stdin WITH (FORMAT csv);
+alter table oanda_instrument rename COLUMN "pipFactor" to "pipfactor";
+select * from oanda_instrument;
+ 
+select * from oanda_instrument;
+ 
+select * from oanda_instrument;
+CREATE TABLE new_table AS 
+TABLE existing_table;
+CREATE TABLE oanda_instrument_copy AS 
+TABLE oanda_instrument;
+alter  table oanda_instrument drop column symbol ;
+\?
+\di
+\di oanda_instrument_s
+\d oanda_instrument
+select * from oanda_instrument;
+\d oanda_instrument;
+select * from oanda_instrument;
+\?
+\s
+\s dbhistory

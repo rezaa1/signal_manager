@@ -1,0 +1,54 @@
+- model: trades.follower
+  pk: 4
+  fields:
+    created: 2019-01-01 00:00:00+00:00
+    account: 3
+    channel: 1
+    strategy: 3
+    risk: 1
+    owner: 16
+- model: trades.follower
+  pk: 5
+  fields:
+    created: 2019-01-01 00:00:00+00:00
+    account: 2
+    channel: 1
+    strategy: 2
+    risk: 1
+    owner: 16
+- model: trades.follower
+  pk: 6
+  fields:
+    created: 2019-12-13 00:00:00+00:00
+    account: 4
+    channel: 1
+    strategy: 4
+    risk: 1
+    owner: 16
+- model: trades.follower
+  pk: 7
+  fields:
+    created: 2019-12-13 00:00:00+00:00
+    account: 5
+    channel: 1
+    strategy: 5
+    risk: 1
+    owner: 16
+- model: trades.follower
+  pk: 8
+  fields:
+    created: 2019-12-13 00:00:00+00:00
+    account: 6
+    channel: 1
+    strategy: 2
+    risk: 1
+    owner: 16
+- model: trades.follower
+  pk: 9
+  fields:
+    created: 2019-12-13 00:00:00+00:00
+    account: 7
+    channel: 1
+    strategy: 3
+    risk: 1
+    owner: 16

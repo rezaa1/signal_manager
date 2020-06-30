@@ -1,0 +1,9 @@
+Django>=2.0,<3.0
+psycopg2>=2.7,<3.0
+pytest
+django-extensions
+djangorestframework
+pytest-django
+django-bootstrap4
+django-crispy-forms
+gunicorn

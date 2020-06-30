@@ -1,0 +1,5 @@
+<form method="post">
+    {% csrf_token %}
+    {{ formset }}
+    <button type="submit" class="btn btn-success">Save person</button>
+ </form>

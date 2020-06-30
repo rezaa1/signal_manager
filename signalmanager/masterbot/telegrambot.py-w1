@@ -1,0 +1,258 @@
+# -*- coding: utf-8 -*-
+# Example code for telegrambot.py module
+from django_telegrambot.apps import DjangoTelegramBot
+from telegram import ReplyKeyboardMarkup
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
+                          ConversationHandler)
+
+from django.contrib.auth.models import User
+from signals.models import Bot 
+import telegram
+
+
+
+import logging
+logger = logging.getLogger(__name__)
+
+import logging.config
+LOGGING_CONFIG = None
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+    # root logger
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+    },
+})
+
+CHOOSING, TYPING_REPLY, TYPING_CHOICE , CHANNEL_CHOICE , CHANNEL_REPLY , BOT_CHOICE, BOT_REPLY = range(7)
+
+#def forwarded(bot, update):
+#    bot.sendMessage(update.message.chat_id, text='This msg forwaded information:\n {}'.format(update.effective_message))
+#
+
+def help(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Help!')
+
+
+#def echo(bot, update):
+#    update.message.reply_text(update.message.text)
+#
+
+def error(bot, update, error):
+    logger.warn('Update "%s" caused error "%s"' % (update, error))
+
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+
+
+reply_keyboard = [['Register your bot', 'Register a new channel' ],
+                  ['Tradidng Platform'],
+                  ['Done']]
+reply_keyboard_init = [['Signall Provider' ],['Signall copier']]
+markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
+markup_init = ReplyKeyboardMarkup(reply_keyboard_init, one_time_keyboard=True)
+
+class userinfo:
+    def __init__(self,update):
+        self.username=update.message.chat.username
+        self.name=update.message.chat.first_name
+        self.telegram_id=update.message.chat.id
+        try:
+            user = User.objects.select_related('profile').get(profile__telegram_id=tid)
+            self.greating="Wellcome back"
+            self.newuser=False
+        except:
+            user = User.objects.create_user(first_name=self.name, last_name='',username=self.username)
+            user.profile.signal_provider=True
+            user.profile.telegram_id=self.telegram_id
+            user.save
+            user.profile.save()
+            self.newuser=True
+            self.greating="Hi"
+        
+
+
+def start(bot,update):
+    
+    username=update.message.chat.username
+    name=update.message.chat.first_name
+    tid=update.message.chat.id
+
+    #try:
+    user = User.objects.select_related('profile').filter(profile__telegram_id=tid)
+    #user = User.objects.filter(username=username)
+    print("DBG1")
+    if len(user) == 0:
+#        user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
+        user = User.objects.create_user(first_name=name, last_name='',username=username)
+        user.profile.signal_provider=True
+        user.profile.telegram_id=tid
+        user.save
+        user.profile.save()
+        exmsg="Hi"
+    else:
+        exmsg="Wellcome back"
+    #except User.DoesNotExist:
+
+
+    bot.sendMessage(update.message.chat_id,text=
+        exmsg+" "+name +
+        "My name is Trade Manager.\n I will help you in managing signalls and send updates to your subscribers" +
+        " you need to register a bot and add your channel here then install the metatrader EA\n" +
+        "Please choose from these options",
+        reply_markup=markup)
+
+    return CHOOSING
+
+
+def register_bot_choice(bot,update):
+    logger.warning("register_bot_choice")
+    bot.sendMessage(update.message.chat_id,text=
+        'Alright, please go to @BotFather and register a new bot, then send me your bot token:') 
+
+    return BOT_REPLY
+
+def trading_platform_choice(bot,update):
+    logger.warning("trading_platform_choice")
+    bot.sendMessage(update.message.chat_id,text=
+        'Alright, please forward me a message from your channel first, ') 
+    return CHANNEL_REPLY
+
+def register_channel_choice(bot,update):
+    logger.warning("register_channel_choice")
+    bot.sendMessage(update.message.chat_id,text=
+        'Alright, please forward me a message from your channel first, ') 
+    return CHANNEL_REPLY
+
+def bot_information(bot,update):
+    logger.warning("bot_information")
+
+    newtoken = update.message.text
+    tid=update.message.chat.id
+
+    newbot = telegram.Bot(token=newtoken)
+    try:
+        bot_info=newbot.getMe()
+#       {'id': 752542063, 'first_name': 'testbot', 'is_bot': True, 'username': 'p1234567890bot'}
+        if bot_info['is_bot'] == True:
+            user = User.objects.select_related('profile').get(profile__telegram_id=tid)
+            try:
+                botdb = Bot.objects.select_related('owner').select_related('owner__profile').get(owner__profile__telegram_id = tid)
+            except signals.models.DoesNotExist:
+                newbot = Bot(token=newtoken,bot_id=bot_info['id'],name=bot_info['first_name'],username=bot_info['username'],owner=user)
+                newbot.save()
+                bot.sendMessage(update.message.chat_id, text="Neat!"
+                           "name: {} , username{}".format(bot_info['first_name'],bot_info['username']), reply_markup=markup) 
+            else:
+
+                botdb.token=newtoken
+                botdb.bot_id=bot_info['id']
+                botdb.name=bot_info['first_name']
+                botdb.username=bot_info['username']
+                botdb.owner=user
+                botdb.save()
+                bot.sendMessage(update.message.chat_id, text="Neat!"
+                           "updating name: {} , username{}".format(bot_info['first_name'],bot_info['username']), reply_markup=markup) 
+        return CHOOSING
+
+
+    #except (telegram.error.Unauthorized,telegram.error.InvalidToken) as e:
+    except:
+        bot.sendMessage(update.message.chat_id, text="owch! invalid tokenn, try again", reply_markup=markup) 
+        return BOT_REPLY
+
+def channel_information(bot,update):
+    logger.warning("channel_information")
+    cid = update.message.forward_from_chat.id
+    title = update.message.forward_from_chat.title
+
+   
+    bot.sendMessage(update.message.chat_id, text="Neat!"
+                              "id: {}, title {}".format(cid,title), reply_markup=markup) 
+    return CHOOSING
+
+
+
+def received_information(bot, update):
+    print("received_information",update)
+    print("---------------------------------")
+    print("received_information_context",context)
+    text = update.message.text
+
+    update.message.reply_text("Neat! Just so you know, this is what you already told me:"
+                              "{}"
+                              "You can tell me more, or change your opinion on something.".format(
+                                  "ss"), reply_markup=markup)
+
+    return CHOOSING
+
+
+def done(update, context):
+
+
+    return ConversationHandler.END
+
+
+def error(update, context):
+    """Log Errors caused by Updates."""
+    logger.warning('Update "%s" caused error "%s"', update, error)
+
+def main():
+    dps=[]
+    num_bots=len(DjangoTelegramBot.bots)
+    #dp=[None] * num_bots
+
+    # Add conversation handler with the states CHOOSING, TYPING_CHOICE and TYPING_REPLY
+
+    for token in DjangoTelegramBot.bot_tokens:
+       logger.info("Loading handlers for telegram bot {} ".format(token))
+       dps.append( DjangoTelegramBot.getDispatcher(bot_id=token))     #get by bot token
+
+    # on different commands - answer in Telegram
+    for i  in range(0,len(dps)):
+       dps[i].add_handler(conv_handler)
+       dps[i].add_error_handler(error)
+
+
+#+++++++++++++++++
+
+
+conv_handler = ConversationHandler(
+        entry_points=[CommandHandler('start', start)],
+
+        states={
+            CHOOSING: [
+                       RegexHandler('^Register your bot$', register_bot_choice),
+                       RegexHandler('^Register a new channel$', register_channel_choice),
+                       RegexHandler('^Trading Platform$', trading_platform_choice),
+                      ],
+            CHANNEL_REPLY: [MessageHandler(Filters.text, channel_information), ],
+            BOT_REPLY: [MessageHandler(Filters.text, bot_information), ],
+        },
+
+        fallbacks=[RegexHandler('^Done$', done)]
+)
+
+
+
+if __name__ == '__main__':
+    main()

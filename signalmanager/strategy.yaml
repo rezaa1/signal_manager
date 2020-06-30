@@ -1,0 +1,85 @@
+- model: trades.strategy
+  pk: 1
+  fields:
+    name: MoMange1
+    description: test
+    stoploss: false
+    manage_trade: false
+    pending_order: false
+    break_even: true
+    close_half: true
+    size_multiplier: 0.1
+    size_type: 3
+    units: 0
+    filter_enabled: false
+    filter_lot_size: ''
+    filter_direction: 0
+    filter_ea_number: ''
+- model: trades.strategy
+  pk: 2
+  fields:
+    name: nsTrader_lgterm_long
+    description: long trades on 1H time fram
+    stoploss: false
+    manage_trade: false
+    pending_order: false
+    break_even: null
+    close_half: null
+    size_multiplier: 1.0
+    size_type: 3
+    units: 0
+    filter_enabled: true
+    filter_lot_size: '1'
+    filter_direction: 2
+    filter_ea_number: ''
+- model: trades.strategy
+  pk: 3
+  fields:
+    name: nsTrader_lgterm_short
+    description: short trades on 1H time fram
+    stoploss: false
+    manage_trade: false
+    pending_order: false
+    break_even: null
+    close_half: null
+    size_multiplier: 0.01
+    size_type: 3
+    units: 0
+    filter_enabled: true
+    filter_lot_size: '1'
+    filter_direction: 1
+    filter_ea_number: ''
+- model: trades.strategy
+  pk: 4
+  fields:
+    name: nsTrader_shterm_short
+    description: short trades on 1H time fram
+    stoploss: false
+    manage_trade: false
+    pending_order: false
+    break_even: null
+    close_half: null
+    size_multiplier: 0.01
+    size_type: 3
+    units: 0
+    filter_enabled: true
+    filter_lot_size: '0.5'
+    filter_direction: 1
+    filter_ea_number: ''
+- model: trades.strategy
+  pk: 5
+  fields:
+    name: nsTrader_shterm_long
+    description: long trades on 5m time frame
+    stoploss: false
+    manage_trade: false
+    pending_order: false
+    break_even: null
+    close_half: null
+    size_multiplier: 0.01
+    size_type: 3
+    units: 0
+    filter_enabled: true
+    filter_lot_size: '0.5'
+    filter_direction: 2
+    filter_ea_number: ''

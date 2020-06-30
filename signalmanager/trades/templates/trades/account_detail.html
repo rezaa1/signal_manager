@@ -1,0 +1,23 @@
+{% extends 'basebs.html' %}
+
+{% block title %}
+    Forms
+{% endblock %}
+
+{% block content %}
+
+    <form role="form" method="post">
+        {% csrf_token %}
+		<table class="table">
+			<tr><td>name</td><td>{{ object.name }}</td></tr>
+			<tr><td>environment</td><td>{{ object.environment }}</td></tr>
+			<tr><td>description</td><td>{{ object.description }}</td></tr>
+		</table>
+
+        <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Account</a>
+
+    </form>
+
+
+
+{% endblock %}

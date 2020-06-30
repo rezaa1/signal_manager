@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'trades_trade_list' %}">Trade Listing</a></p>
+<table class="table">
+<tr><td>created</td><td>{{ object.created }}</td></tr>
+<tr><td>orderid</td><td>{{ object.orderid }}</td></tr>
+<tr><td>symbol</td><td>{{ object.symbol }}</td></tr>
+<tr><td>type</td><td>{{ object.type }}</td></tr>
+<tr><td>stoploss</td><td>{{ object.stoploss }}</td></tr>
+<tr><td>price</td><td>{{ object.price }}</td></tr>
+<tr><td>units</td><td>{{ object.units }}</td></tr>
+<tr><td>takeprofit</td><td>{{ object.takeprofit }}</td></tr>
+<tr><td>status</td><td>{{ object.status }}</td></tr>
+<tr><td>open_price</td><td>{{ object.open_price }}</td></tr>
+<tr><td>open_time</td><td>{{ object.open_time }}</td></tr>
+<tr><td>error_code</td><td>{{ object.error_code }}</td></tr>
+<tr><td>error_reason</td><td>{{ object.error_reason }}</td></tr>
+<tr><td>close_price</td><td>{{ object.close_price }}</td></tr>
+<tr><td>close_reason</td><td>{{ object.close_reason }}</td></tr>
+<tr><td>close_time</td><td>{{ object.close_time }}</td></tr>
+<tr><td>realizedPL</td><td>{{ object.realizedPL }}</td></tr>
+<tr><td>order_comment</td><td>{{ object.order_comment }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Trade</a>
+
+{% endblock %}

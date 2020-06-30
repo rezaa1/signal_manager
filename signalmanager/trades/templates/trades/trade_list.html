@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'trades_trade_list' %}">Trade Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>created</td>
+    <td>orderid</td>
+    <td>symbol</td>
+    <td>type</td>
+    <td>stoploss</td>
+    <td>price</td>
+    <td>units</td>
+    <td>takeprofit</td>
+    <td>status</td>
+    <td>open_price</td>
+    <td>open_time</td>
+    <td>error_code</td>
+    <td>error_reason</td>
+    <td>close_price</td>
+    <td>close_reason</td>
+    <td>close_time</td>
+    <td>realizedPL</td>
+    <td>order_comment</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.created }}</td>
+    <td>{{ object.orderid }}</td>
+    <td>{{ object.symbol }}</td>
+    <td>{{ object.type }}</td>
+    <td>{{ object.stoploss }}</td>
+    <td>{{ object.price }}</td>
+    <td>{{ object.units }}</td>
+    <td>{{ object.takeprofit }}</td>
+    <td>{{ object.status }}</td>
+    <td>{{ object.open_price }}</td>
+    <td>{{ object.open_time }}</td>
+    <td>{{ object.error_code }}</td>
+    <td>{{ object.error_reason }}</td>
+    <td>{{ object.close_price }}</td>
+    <td>{{ object.close_reason }}</td>
+    <td>{{ object.close_time }}</td>
+    <td>{{ object.realizedPL }}</td>
+    <td>{{ object.order_comment }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'trades_trade_create' %}">Create new Trade</a>
+{% endblock %}

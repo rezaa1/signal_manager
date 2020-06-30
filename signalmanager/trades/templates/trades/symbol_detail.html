@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'trades_symbol_list' %}">Symbol Listing</a></p>
+<table class="table">
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Symbol</a>
+
+{% endblock %}

@@ -1,0 +1,285 @@
+order market suc
+
+{
+  "orderCreateTransaction": {
+    "type": "MARKET_ORDER",
+    "instrument": "AUD_CAD",
+    "units": "1351",
+    "timeInForce": "FOK",
+    "positionFill": "DEFAULT",
+    "takeProfitOnFill": {
+      "price": "0.96090",
+      "timeInForce": "GTC"
+    },
+    "stopLossOnFill": {
+      "price": "0.90930",
+      "timeInForce": "GTC"
+    },
+    "reason": "CLIENT_ORDER",
+    "clientExtensions": {
+      "id": "18107",
+      "comment": "18107"
+    },
+    "id": "1566",
+    "accountID": "001-011-1957873-006",
+    "userID": 1957873,
+    "batchID": "1566",
+    "requestID": "60599592716601411",
+    "time": "2019-07-15T05:01:41.712153634Z"
+  },
+  "orderFillTransaction": {
+    "type": "ORDER_FILL",
+    "orderID": "1566",
+    "clientOrderID": "18107",
+    "instrument": "AUD_CAD",
+    "units": "1351",
+    "requestedUnits": "1351",
+    "price": "0.91630",
+    "pl": "0.0000",
+    "financing": "0.0000",
+    "commission": "0.0000",
+    "accountBalance": "237.9863",
+    "gainQuoteHomeConversionFactor": "1.091345629161",
+    "lossQuoteHomeConversionFactor": "1.09160771985",
+    "guaranteedExecutionFee": "0.0000",
+    "halfSpreadCost": "0.1622",
+    "fullVWAP": "0.91630",
+    "reason": "MARKET_ORDER",
+    "tradeOpened": {
+      "price": "0.91630",
+      "tradeID": "1567",
+      "units": "1351",
+      "guaranteedExecutionFee": "0.0000",
+      "halfSpreadCost": "0.1622",
+      "initialMarginRequired": "13.5100"
+    },
+    "fullPrice": {
+      "closeoutBid": "0.91608",
+      "closeoutAsk": "0.91630",
+      "timestamp": "2019-07-15T05:01:22.432650137Z",
+      "bids": [
+        {
+          "price": "0.91608",
+          "liquidity": "10000000"
+        }
+      ],
+      "asks": [
+        {
+          "price": "0.91630",
+          "liquidity": "10000000"
+        }
+      ]
+    },
+    "id": "1567",
+    "accountID": "001-011-1957873-006",
+    "userID": 1957873,
+    "batchID": "1566",
+    "requestID": "60599592716601411",
+    "time": "2019-07-15T05:01:41.712153634Z"
+  },
+  "relatedTransactionIDs": [
+    "1566",
+    "1567",
+    "1568",
+    "1569"
+  ],
+  "lastTransactionID": "1569"
+}
+____
+
+i
+Error msg: (None, V20Error('{"orderRejectTransaction":{"type":"STOP_ORDER_REJECT","instrument":"XAU_USD","units":"0","price":"1412.00000","timeInForce":"GTC","triggerCondition":"DEFAULT","partialFill":"DEFAULT","positionFill":"DEFAULT","takeProfitOnFill":{"price":"1430.00000","timeInForce":"GTC"},"stopLossOnFill":{"price":"1400.00000","timeInForce":"GTC"},"rejectReason
+":"UNITS_INVALID","reason":"CLIENT_ORDER","id":"331","accountID":"101-011-11132956-018","userID":11132956,"batchID":"331","requestID":"42585207406780994","time":"2019-07-15T05:54:08.186010400Z"},"relatedTransactionIDs":["331"],"lastTransactionID":"331","errorMessage":"Order units specified are invalid","errorCode":"UNITS_INVALID"}',))
+save order m1
+
+i
+
+
+
+
+
+
+
+
+
+Notif in func: 594 pendingOrder
+('preparing to put pending order', ('EUR_USD:ETAPAID typ:buy AT:1.1276 SL:1.133 TP:1.134', 'orderID:', 'status:', 0, 0))
+{
+  "orderCreateTransaction": {
+    "type": "LIMIT_ORDER",
+    "instrument": "EUR_USD",
+    "units": "130",
+    "price": "1.12760",
+    "timeInForce": "GTC",
+    "triggerCondition": "DEFAULT",
+    "partialFill": "DEFAULT",
+    "positionFill": "DEFAULT",
+    "takeProfitOnFill": {
+      "price": "1.13400",
+      "timeInForce": "GTC"
+    },
+    "stopLossOnFill": {
+      "price": "1.13300",
+      "timeInForce": "GTC"
+    },
+    "reason": "CLIENT_ORDER",
+    "id": "2350",
+    "accountID": "001-011-1957873-007",
+    "userID": 1957873,
+    "batchID": "2350",
+    "requestID": "150671611777334174",
+    "time": "2019-07-15T06:47:02.100260743Z"
+  },
+  "orderCancelTransaction": {
+    "type": "ORDER_CANCEL",
+    "orderID": "2350",
+    "reason": "INSUFFICIENT_MARGIN",
+    "id": "2351",
+    "accountID": "001-011-1957873-007",
+    "userID": 1957873,
+    "batchID": "2350",
+    "requestID": "150671611777334174",
+    "time": "2019-07-15T06:47:02.100260743Z"
+  },
+  "relatedTransactionIDs": [
+    "2350",
+    "2351"
+  ],
+  "lastTransactionID": "2351"
+}
+____
+
+
+
+
+
+i
+Order close half -done ', ('XAU_USD:Horizon Forex typ:sell AT:1415.45 SL:1420.45 TP:1408.45', 'orderID:', 'status:', 1, '440'))
+ERROR in close trade {"orderRejectTransaction":{"type":"MARKET_ORDER_REJECT","rejectReason":"UNITS_INVALID","instrument":"XAU_USD","timeInForce":"FOK","positionFill":"REDUCE_ONLY","reason":"TRADE_CLOSE","tradeClose":{"units":"0","tradeID":"440"},"id":"449","accountID":"101-011-11296588-002","userID":11296588,"batchID":"449","requestID":"42585575266953890","time":"2019-
+07-16T06:15:53.283965075Z"},"relatedTransactionIDs":["449"],"lastTransactionID":"449","errorMessage":"Order units specified are invalid","errorCode":"UNITS_INVALID"}
+Error in func: 537 closeTrade
+Error msg: ('__main__', [])
+Notif in func: 1659 <module>
+('breakeven the trade',)
+{
+  "takeProfitOrderCancelTransaction": {
+    "type": "ORDER_CANCEL",
+    "orderID": "441",
+    "replacedByOrderID": "451",
+    "reason": "CLIENT_REQUEST_REPLACED",
+    "id": "450",
+    "accountID": "101-011-11296588-002",
+    "userID": 11296588,
+    "batchID": "450",
+    "requestID": "42585575271149655",
+    "time": "2019-07-16T06:15:54.177296754Z"
+  },
+  "takeProfitOrderTransaction": {
+    "type": "TAKE_PROFIT_ORDER",
+    "tradeID": "440",
+    "clientTradeID": "221328672",
+    "timeInForce": "GTC",
+    "triggerCondition": "DEFAULT",
+    "price": "1408.450",
+    "reason": "REPLACEMENT",
+    "replacesOrderID": "441",
+    "cancellingTransactionID": "450",
+    "id": "451",
+    "accountID": "101-011-11296588-002",
+    "userID": 11296588,
+    "batchID": "450",
+    "requestID": "42585575271149655",
+    "time": "2019-07-16T06:15:54.177296754Z"
+  },
+  "stopLossOrderCancelTransaction": {
+    "type": "ORDER_CANCEL",
+    "orderID": "442",
+    "replacedByOrderID": "453",
+    "reason": "CLIENT_REQUEST_REPLACED",
+    "id": "452",
+    "accountID": "101-011-11296588-002",
+    "userID": 11296588,
+    "batchID": "450",
+    "requestID": "42585575271149655",
+    "time": "2019-07-16T06:15:54.177296754Z"
+  },
+  "stopLossOrderTransaction": {
+    "type": "STOP_LOSS_ORDER",
+    "tradeID": "440",
+    "clientTradeID": "221328672",
+    "timeInForce": "GTC",
+    "triggerCondition": "DEFAULT",
+    "price": "1415.436",
+    "guaranteed": false,
+    "reason": "REPLACEMENT",
+    "replacesOrderID": "442",
+    "cancellingTransactionID": "452",
+    "id": "453",
+    "accountID": "101-011-11296588-002",
+    "userID": 11296588,
+    "batchID": "450",
+    "requestID": "42585575271149655",
+    "time": "2019-07-16T06:15:54.177296754Z"
+  },
+  "relatedTransactionIDs": [
+    "450",
+    "451",
+    "452",
+    "453"
+  ],
+  "lastTransactionID": "453"
+}
+____
+tid
+____
+Notif in func: 982 breakevenTrade
+
+
+Notif in func: 594 pendingOrder
+('preparing to put pending order', ('GBP_USD:ProfitsWUs typ:buy AT:1.25134 SL:1.24305 TP:1.2562', 'orderID:', 'status:', 0, 0))
+{
+  "orderCreateTransaction": {
+    "type": "LIMIT_ORDER",
+    "instrument": "GBP_USD",
+    "units": "424",
+    "price": "1.25134",
+    "timeInForce": "GTC",
+    "triggerCondition": "DEFAULT",
+    "partialFill": "DEFAULT",
+    "positionFill": "DEFAULT",
+    "takeProfitOnFill": {
+      "price": "1.25620",
+      "timeInForce": "GTC"
+    },
+    "stopLossOnFill": {
+      "price": "1.24305",
+      "timeInForce": "GTC"
+    },
+    "reason": "CLIENT_ORDER",
+    "id": "1394",
+    "accountID": "101-001-8394451-018",
+    "userID": 8394451,
+    "batchID": "1394",
+    "requestID": "24571192379852670",
+    "time": "2019-07-16T07:17:58.338247618Z"
+  },
+  "orderCancelTransaction": {
+    "type": "ORDER_CANCEL",
+    "orderID": "1394",
+    "reason": "INSUFFICIENT_MARGIN",
+    "id": "1395",
+    "accountID": "101-001-8394451-018",
+    "userID": 8394451,
+    "batchID": "1394",
+    "requestID": "24571192379852670",
+    "time": "2019-07-16T07:17:58.338247618Z"
+  },
+  "relatedTransactionIDs": [
+    "1394",
+    "1395"
+  ],
+  "lastTransactionID": "1395"
+}
+____
+save order m1
+

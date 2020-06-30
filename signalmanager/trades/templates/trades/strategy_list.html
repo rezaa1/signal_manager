@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'trades_strategy_list' %}">Strategy Listing</a></p>
+<table class="table">
+    <tr>
+        {% for label, value in object_list.0.get_fields %}
+            <td>{{ label }}</td>
+        {% endfor %}
+    </tr>
+
+    {% for object in object_list %}
+        <tr>
+            {% for label, value in object.get_fields %}
+                {% if label == "name" %}
+                    <td><a href="{{object.get_absolute_url}}">{{value}}</a></td>
+                {% else %}
+                  <td>{{ value }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table><a class="btn btn-primary" href="{% url 'trades_strategy_create' %}">Create new Strategy</a>
+{% endblock %}

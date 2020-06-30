@@ -1,0 +1,95 @@
+# -*- coding: utf-8 -*-
+# Example code for telegrambot.py module
+from telegram.ext import CommandHandler, MessageHandler, Filters
+from django_telegrambot.apps import DjangoTelegramBot
+
+import logging
+logger = logging.getLogger(__name__)
+
+import logging.config
+LOGGING_CONFIG = None
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+    # root logger
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+    },
+})
+
+# Define a few command handlers. These usually take the two arguments bot and
+# update. Error handlers also receive the raised TelegramError object in error.
+def start(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Hi!')
+
+
+def startgroup(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Hi!')
+
+
+def me(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Your information:\n{}'.format(update.effective_user))
+
+
+def chat(bot, update):
+    bot.sendMessage(update.message.chat_id, text='This chat information:\n {}'.format(update.effective_chat))
+
+
+def forwarded(bot, update):
+    bot.sendMessage(update.message.chat_id, text='This msg forwaded information:\n {}'.format(update.effective_message))
+
+
+def help(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Help!')
+
+
+def echo(bot, update):
+    update.message.reply_text(update.message.text)
+
+
+def error(bot, update, error):
+    logger.warn('Update "%s" caused error "%s"' % (update, error))
+
+
+def main():
+    dps=[]
+    num_bots=len(DjangoTelegramBot.bots)
+    #dp=[None] * num_bots
+    for token in DjangoTelegramBot.bot_tokens:
+       logger.info("Loading handlers for telegram bot {} ".format(token))
+       dps.append( DjangoTelegramBot.getDispatcher(bot_id=token))     #get by bot token
+
+    # dp = DjangoTelegramBot.getDispatcher('BOT_n_')  #get by bot username
+
+    # on different commands - answer in Telegram
+    for i  in range(0,len(dps)):
+       dps[i].add_handler(CommandHandler("start", start))
+       dps[i].add_handler(CommandHandler("help", help))
+
+       dps[i].add_handler(CommandHandler("channel", channel))
+       dps[i].add_handler(CommandHandler("me", me))
+       dps[i].add_handler(CommandHandler("chat", chat))
+       dps[i].add_handler(MessageHandler(Filters.forwarded , forwarded))
+
+    # on noncommand i.e message - echo the message on Telegram
+       dps[i].add_handler(MessageHandler(Filters.text, echo))
+
+    # log all errors
+       dps[i].add_error_handler(error)
+
+

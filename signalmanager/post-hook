@@ -1,0 +1,41 @@
+#!/bin/bash
+mkdir /opt/docker 2>/dev/null
+cd /opt/docker
+
+[ -d signalmanager ] && rm -rf signalmanger
+git clone ssh://git@localhost/home/git/signalmanager.git
+
+cd signalmanager
+docker-compose up 
+exit
+
+cd /opt/signal/signalmanager/
+. /opt/signal/env/bin/activate
+
+date >> /tmp/pushme-1 
+git pull >> /tmp/pushme-1 2>&1
+
+python manage.py check >> /tmp/pushme-error 2>&1
+chk=$?
+echo "chk status $chk" >> /tmp/pushme-1
+if [ $chk -eq 0 ]; then
+	echo "inloop $chk" >> /tmp/pushme-1
+
+	/etc/mod_wsgi-express-80/apachectl restart
+    pkill -9 -f manage.py
+    python manage.py makemigrations 
+    python manage.py migrate 
+    systemctl restart signal-trade-mnt.service                                                                           
+    systemctl restart signal-trade-q.service                                                                           
+
+    #     setsid python manage.py process_tasks --queue trade-mnt --duration 0 --sleep 10 > log-trade-mnt.log 2>&1 & 
+    # setsid python manage.py process_tasks --queue trade-queue --duration 0 --sleep 10 > log-trade-queue.log 2>&1  &
+    echo "restart"
+    sleep 1
+    ps -ef| grep manage.py
+else
+    echo "Error detected"
+    cat /tmp/pushme-error
+    #echo "revert"
+   	 #git revert `git log --oneline| head -1 | cut -f1 -d\ `
+fi

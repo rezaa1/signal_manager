@@ -1,0 +1,14 @@
+- model: trades.accounttype
+  pk: 2
+  fields:
+    name: V20_DEMO
+    broker: 2
+    environment: practice
+    description: oanda_V20_DEMO
+- model: trades.accounttype
+  pk: 3
+  fields:
+    name: V20Live
+    broker: 2
+    environment: live
+    description: oanda_V20_LIVE
