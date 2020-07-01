@@ -17,8 +17,8 @@ services:
 
 
   web:
-    container_name: todo_backend
-    build: ./app
+    container_name: signal_backend
+    build: ./signalmanager
     env_file:
       - ./.env
     expose:

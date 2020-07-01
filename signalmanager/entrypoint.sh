@@ -10,6 +10,7 @@ echo "PostgreSQL started"
 python manage.py makemigrations task
 python manage.py makemigrations
 python manage.py migrate
-gunicorn todo_manager.wsgi:application --bind 0.0.0.0:8000
+
+gunicorn signalmanager.wsgi:application --bind 0.0.0.0:8000
 
 exec "$@"
