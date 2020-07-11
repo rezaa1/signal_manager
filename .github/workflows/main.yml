@@ -1,0 +1,17 @@
+name: Docker compose build 
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: copy env file
+      run: cp .env-sample .env
+    - name: Build the docker-compose stack
+      run: docker-compose --verbose up -d
+    - name: Check running containers
+      run: docker ps
+    - name: Run test suite
+      run: docker exec todo_backend pytest
