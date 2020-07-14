@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from django_telegrambot.apps import DjangoTelegramBot
 from django.apps import AppConfig
 
 class BotConfig(AppConfig):

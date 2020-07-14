@@ -22,14 +22,15 @@ services:
     env_file:
       - ./.env
     expose:
-      - 8000
+      - ${WEB_HTTP_INTERNAL}
     depends_on:
       - db
 
   nginx:
     build: ./nginx
     ports:
-      - 8080:80
+      - ${WEB_HTTP_INTERNAL}:${WEB_HTTP_PORT}
+      - ${WEB_HTTPS_INTERNAL}:${WEB_HTTPS_PORT}
     depends_on:
       - web
 

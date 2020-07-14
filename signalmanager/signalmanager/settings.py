@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import dj_database_url
+#import dj_database_url
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'trades',
     'oanda',
     'symbols',
-    'mod_wsgi.server',
     'crispy_forms',
     'timer',
     'bootstrap4',
@@ -102,14 +101,25 @@ WSGI_APPLICATION = 'signalmanager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'signals',
-        'USER': 'signalp',
-        'PASSWORD': 'password',
-        'HOST': '/var/run/postgresql/',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("SQL_DB", "postgres"),
+        'USER': os.environ.get("SQL_USER", "postgres"),
+        'PASSWORD': os.environ.get("SQL_PASSWORD", "postgres"),
+        'HOST': os.environ.get("SQL_HOST", "todo_db"),
+        'PORT': os.environ.get("SQL_PORT", "5432"), # default postgres port 5432
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'signals',
+#        'USER': 'signalp',
+#        'PASSWORD': 'password',
+#        'HOST': '/var/run/postgresql/',
+#        'PORT': '',
+#    }
+#}
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -335,7 +345,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/signalmanager/debug.log',
+            'filename': '/var/log/signalmanager-ebug.log',
         },
     },
     'loggers': {
