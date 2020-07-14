@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': os.environ.get("SQL_DB", "postgres"),
         'USER': os.environ.get("SQL_USER", "postgres"),
         'PASSWORD': os.environ.get("SQL_PASSWORD", "postgres"),
-        'HOST': os.environ.get("SQL_HOST", "todo_db"),
+        'HOST': os.environ.get("SQL_HOST", "signal_db"),
         'PORT': os.environ.get("SQL_PORT", "5432"), # default postgres port 5432
     }
 }
@@ -345,7 +345,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/signalmanager-ebug.log',
+            'filename': '/var/log/signalmanager-debug.log',
         },
     },
     'loggers': {

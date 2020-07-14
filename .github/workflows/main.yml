@@ -13,5 +13,7 @@ jobs:
       run: docker-compose --verbose up -d
     - name: Check running containers
       run: docker ps
+    - name: Check db
+      run: docker exec
     - name: Run test suite
       run: docker exec todo_backend pytest
