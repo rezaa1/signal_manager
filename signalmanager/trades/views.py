@@ -135,7 +135,7 @@ class BrokerUpdateView(UpdateView):
 
 class StrategyListView(ListView):
     model = Strategy
-    data = serializers.serialize( "python", Strategy.objects.all() )
+#    data = serializers.serialize( "python", Strategy.objects.all() )
 
 
 class StrategyCreateView(CreateView):

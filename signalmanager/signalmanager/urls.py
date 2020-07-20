@@ -15,9 +15,9 @@ from django.contrib.auth import views as auth_views
 
 
 # startup process
-maintain_trades(repeat=600)
-maintain_price_update()
-start_bots()
+from django.apps import AppConfig
+
+
 
 
 #from django.conf.urls import patterns
@@ -25,6 +25,19 @@ from django.contrib import admin
 
 # Register your models here.
 admin.autodiscover()
+
+
+import sys
+startup=True
+if len(sys.argv) > 1:
+   if sys.argv[1] == "makemigrations" or sys.argv[1] == "migrate":
+      startup=False
+
+if startup:
+   print("STARTUP OK")
+#   maintain_trades(repeat=600)
+#   maintain_price_update()
+#   start_bots()
 
 
 API_TITLE = 'Pastebin API'

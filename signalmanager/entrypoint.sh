@@ -6,11 +6,10 @@ done
 
 echo "PostgreSQL started"
 
-# python manage.py flush --no-input
-python manage.py makemigrations task
-python manage.py makemigrations
-python manage.py migrate
+python manage.py flush --no-input
+python manage.py makemigrations 
+python manage.py migrate --run-syncdb
 
-#gunicorn signalmanager.wsgi:application --bind 0.0.0.0:$WEB_HTTP_INTERNAL
+gunicorn signalmanager.wsgi:application --bind 0.0.0.0:$WEB_HTTP_INTERNAL
 
 exec "$@"
