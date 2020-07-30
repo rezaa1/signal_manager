@@ -156,6 +156,7 @@ def create_order(signal,follower,trade=None):
 
     logger.debug("trade entry account no {} signal {} trade {} ".format(follower.account.account_no,signal.id,trade) )
     stg = Strategy.objects.get(pk=follower.strategy_id)
+    risk = follower.risk
     
     if trade == None:
         # Strategey Check Start
@@ -194,7 +195,7 @@ def create_order(signal,follower,trade=None):
         if stg.size_type == STG_SIZE_MULTIPLIER:
             logger.debug(" stg is STG_SIZE_MULTIPLIER , :{} :{}: {} ".format(signal.order_lot ,LOTS_UNITS , stg.size_multiplier) )
             signal_units = float(signal.order_lot) * LOTS_UNITS
-            trade_units =  round( signal_units * float(stg.size_multiplier))
+            trade_units =  round( signal_units * float(follower.size_multiplier))
             oanda.units = trade_units * oanda.direction
         elif stg.size_type == STG_SIZE_FIX:
             oanda.units = stg.units * oanda.direction
