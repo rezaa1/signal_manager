@@ -17,3 +17,13 @@ jobs:
       run: docker exec
     - name: Run test suite
       run: docker exec todo_backend pytest
+redeploy:
+    name: Redeploy - Webhook call
+    runs-on: ubuntu-18.04
+    needs: [docker]
+    steps:
+      - name: Deploy docker container webhook
+        uses: joelwmale/webhook-action@master
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOKURL_DEV  }}
+          data: "{ 'myField': 'myFieldValue'}"

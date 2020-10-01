@@ -4,7 +4,7 @@ from django.db import models
 class Instrument(models.Model):
 #name,type,pipLocation,displayPrecision,minimumTradeSize
 
-    name = models.CharField(max_length=20,unique=True)
+    name = models.CharField(max_length=20,unique=False)
     symbol = models.CharField(max_length=20,unique=True)
     type = models.CharField(max_length=20)
     pipLocation  = models.IntegerField()

@@ -198,6 +198,7 @@ class Follower(models.Model):
     channel = models.ForeignKey('signals.Channel',on_delete=models.CASCADE)
     strategy = models.ForeignKey('Strategy',on_delete=models.CASCADE)
     risk = models.IntegerField(default=1)
+    size_multiplier  = models.FloatField(blank=True,default=1)  
     owner = models.ForeignKey(
         'auth.User', related_name='followers', on_delete=models.CASCADE)
 
