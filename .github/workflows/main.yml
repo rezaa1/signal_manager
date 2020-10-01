@@ -13,6 +13,8 @@ jobs:
       run: docker-compose --verbose up -d
     - name: Check running containers
       run: docker ps
+    - name: call webhook
+      run: curl ${{ secrets.WEBHOOKURL_DEV  }}
     # - name: Check db
     #   run: docker exec
     # - name: Run test suite

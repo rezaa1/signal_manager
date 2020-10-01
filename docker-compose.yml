@@ -17,7 +17,7 @@ services:
 
 
   web:
-    container_name: signal_backend
+    container_name: ${BACKED_NAME}
     build: ./signalmanager
     env_file:
       - ./.env
