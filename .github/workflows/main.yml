@@ -15,8 +15,8 @@ jobs:
       run: docker ps
     # - name: Check db
     #   run: docker exec
-    - name: Run test suite
-      run: docker exec todo_backend pytest
+    # - name: Run test suite
+    #   run: docker exec todo_backend pytest
   redeploy:
     name: Redeploy - Webhook call
     runs-on: ubuntu-18.04
