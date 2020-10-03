@@ -1,6 +1,9 @@
 version: '3.7'
 
 services:
+  networks:
+    - signal_manager_network
+
   db:
     container_name: ${SQL_HOST}
     image: postgres
@@ -33,8 +36,15 @@ services:
       - ${WEB_HTTPS_PORT}:443
     depends_on:
       - web
+    env_file:
+      - ./.env
 
 volumes:
   postgres_data:
     name: ${POSTGRES_VOLUME}
+
+networks:
+  signal_manager_network:
+    name: signal_manager_network
+    driver: bridge
 
