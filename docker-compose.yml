@@ -1,9 +1,6 @@
 version: '3.7'
 
 services:
-  networks:
-    - signal_manager_network
-
   db:
     container_name: ${SQL_HOST}
     image: postgres
@@ -44,7 +41,6 @@ volumes:
     name: ${POSTGRES_VOLUME}
 
 networks:
-  signal_manager_network:
+  default:
     name: signal_manager_network
     driver: bridge
-
