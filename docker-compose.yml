@@ -23,7 +23,7 @@ services:
 #    expose:
 #      - ${WEB_HTTP_INTERNAL}
     ports:
-      - ${WEB_HTTP_PORT}:${WEB_HTTP_INTERNAL}
+      - 127.0.0.1:${WEB_HTTP_PORT}:${WEB_HTTP_INTERNAL}
 
     depends_on:
       - db
