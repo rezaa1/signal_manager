@@ -10,6 +10,7 @@ class Instrument(models.Model):
     pipLocation  = models.IntegerField()
     displayPrecision  = models.IntegerField()
     minimumTradeSize  = models.FloatField()
+    maximumTradeSize  = models.FloatField(blank=True,null=True)
     pipFactor  = models.FloatField()
 
     tick_time = models.DateTimeField(blank=True,null=True)

@@ -122,12 +122,10 @@ class Oanda:
         if symbol == None and type==None:
             return  
 
-        try:
-            instrument = Instrument.objects.get(symbol=symbol)
-        except:
-            try:
-                instrument = Instrument.objects.get(name=symbol)
-            except Instrument.DoesNotExist:
+        instrument = Instrument.objects.filter(symbol=symbol).first()
+        if not instrument:
+            instrument = Instrument.objects.filter(name=symbol).first()
+            if not instrument:
                 self.logger.debug("oanda error, Instrument dosent exist, {}".format(symbol))
                 raise InstrumentIsNotTradeable("Instrument is not found")
 
@@ -139,6 +137,8 @@ class Oanda:
         self.status= status
 
         self.symbol = instrument.name 
+        self.maximumTradeSize=instrument.maximumTradeSize
+        self.minimumTradeSize=instrument.minimumTradeSize
         try:     
             self.price = float(price)
         except:
@@ -263,9 +263,12 @@ class Oanda:
         return
 
         pass
+    def chekUnitSize(self):
+        if  ( self.units  > self.maximumTradeSize ): self.units = self.maximumTradeSize
+        if  ( self.units  < self.minimumTradeSize ): self.units = self.minimumTradeSize
 
     def putTrade(self,order=None):
-       
+        self.chekUnitSize() 
         params = dict( instrument=self.symbol , units=self.units)
         if self.takeprofit != 0:  params=dict(params.items(), takeProfitOnFill=TakeProfitDetails(price=self.takeprofit).data )
         if self.stoploss != 0:  params=dict(params.items(), stopLossOnFill=StopLossDetails(price=self.stoploss).data)
