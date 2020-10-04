@@ -15,26 +15,18 @@ services:
       - ${SQL_PORT}
     restart: always
 
-
   web:
     container_name: ${BACKEND_NAME}
     build: ./signalmanager
     env_file:
       - ./.env
-    expose:
-      - ${WEB_HTTP_INTERNAL}
+#    expose:
+#      - ${WEB_HTTP_INTERNAL}
+    ports:
+      - ${WEB_HTTP_PORT}:${WEB_HTTP_INTERNAL}
+
     depends_on:
       - db
-
-  nginx:
-    build: ./nginx
-    ports:
-      - ${WEB_HTTP_PORT}:80
-      - ${WEB_HTTPS_PORT}:443
-    depends_on:
-      - web
-    env_file:
-      - ./.env
 
 volumes:
   postgres_data:
