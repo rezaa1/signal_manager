@@ -61,6 +61,47 @@ def mtupdate_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#Quick fix to get active list only, needs to be fixed later.
+@api_view(['GET', 'POST'])
+def mtupdate_list_active(request):
+    """
+    List all code signals, or create a new signal.
+    """
+    update=False
+    if request.method == 'GET':
+        signals = Signal.objects.filter(owner=request.user).exclude(order_status='Deleted').exclude(order_status='Closed')
+        serializer = SignalSerializer(signals, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        try:
+            print("DBGGG view mtupdate post")
+            signal = Signal.objects.get(owner=request.user,order_id=request.data['order_id'])
+            serializer = SignalSerializer(signal, data=request.data)
+            update=True
+        except Signal.DoesNotExist:
+            serializer = SignalSerializer(data=request.data)
+
+        if serializer.is_valid():
+            if update:
+               #send_update(request.data,signal)
+               order_update=generate_update(request=request.data,data=signal)
+               message=generate_message(request=request.data,data=signal)
+               serializer.save(owner=request.user)
+               print("DBG before gen message",signal.__dict__)
+               manage_channels(signal.id,message,update)
+               manage_trades(signal.id,update=order_update)
+            else:
+               message=generate_message(request=request.data,data=None)
+               serializer.save(owner=request.user)
+               signal = Signal.objects.get(owner=request.user,order_id=request.data['order_id'])
+               manage_channels(signal.id,message,update)
+               manage_trades(signal.id)
+               #id=send_update(request.data)
+               #serializer.save(owner=request.user,message_id=id)
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
