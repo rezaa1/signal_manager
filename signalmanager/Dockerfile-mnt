@@ -10,12 +10,11 @@ RUN apt update -y
 RUN apt install postgresql-client-12 -y
 WORKDIR  /usr/src/app
 COPY requirements.txt  /usr/src/app/
-RUN pip install pip --upgrade
 RUN pip install -r requirements.txt
-COPY ./entrypoint.sh  /usr/src/app/entrypoint.sh
 COPY . /usr/src/app/
+COPY ./entrypoint-q.sh  /usr/src/app/entrypoint-mnt.sh
 #RUN find . -name migrations -type d  |  xargs rm -r
 
-RUN chmod 755 /usr/src/app/entrypoint.sh
+RUN chmod 755 /usr/src/app/entrypoint-mnt.sh
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/entrypoint-mnt.sh"]

@@ -24,9 +24,30 @@ services:
 #      - ${WEB_HTTP_INTERNAL}
     ports:
       - 127.0.0.1:${WEB_HTTP_PORT}:${WEB_HTTP_INTERNAL}
-
     depends_on:
       - db
+
+  task_q:
+    container_name: ${BACKEND_NAME}_q
+    build: 
+      context: ./signalmanager
+      dockerfile: Dockerfile-q
+    env_file:
+      - ./.env
+    depends_on:
+      - web
+      - db
+  task_mnt:
+    container_name: ${BACKEND_NAME}_mnt
+    build: 
+      context: ./signalmanager
+      dockerfile: Dockerfile-mnt
+    env_file:
+      - ./.env
+    depends_on:
+      - web
+      - db
+
 
 volumes:
   postgres_data:

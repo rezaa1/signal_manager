@@ -53,9 +53,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     'timer',
     'bootstrap4',
-    'django_extensions'
+    'django_extensions',
+    'dbbackup'
 ]
-
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',

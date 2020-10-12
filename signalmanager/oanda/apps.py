@@ -137,8 +137,14 @@ class Oanda:
         self.status= status
 
         self.symbol = instrument.name 
-        self.maximumTradeSize=instrument.maximumTradeSize
-        self.minimumTradeSize=instrument.minimumTradeSize
+        if instrument.maximumTradeSize: 
+            self.maximumTradeSize=instrument.maximumTradeSize
+        else:
+            self.maximumTradeSize=0
+        if instrument.minimumTradeSize:
+            self.minimumTradeSize=instrument.minimumTradeSize
+        else:
+            self.minimumTradeSize=0
         try:     
             self.price = float(price)
         except:
@@ -264,8 +270,9 @@ class Oanda:
 
         pass
     def chekUnitSize(self):
-        if  ( self.units  > self.maximumTradeSize ): self.units = self.maximumTradeSize
-        if  ( self.units  < self.minimumTradeSize ): self.units = self.minimumTradeSize
+        direction =  bool(self.units > 0) - bool(self.units < 0)
+        if  ( self.maximumTradeSize != 0 and  abs(self.units)  > self.maximumTradeSize ): self.units = self.maximumTradeSize *  direction
+        if  ( self.minimumTradeSize != 0 and abs(self.units)  < self.minimumTradeSize ): self.units = self.minimumTradeSize * direction
 
     def putTrade(self,order=None):
         self.chekUnitSize() 
