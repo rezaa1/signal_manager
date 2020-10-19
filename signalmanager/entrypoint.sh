@@ -6,7 +6,6 @@ done
 
 echo "PostgreSQL started"
 
-python manage.py flush --no-input
 python manage.py migrate auth
 python manage.py migrate --run-syncdb
 #python manage.py makemigrations auth *

@@ -134,4 +134,4 @@ class AccountForm(forms.ModelForm):
 class FollowerForm(forms.ModelForm):
     class Meta:
         model = Follower
-        fields = ['risk', 'account', 'channel', 'strategy', 'owner']
+        fields = ['risk', 'account', 'channel', 'strategy', 'owner','size_multiplier']

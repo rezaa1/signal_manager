@@ -122,6 +122,7 @@ class Oanda:
         if symbol == None and type==None:
             return  
 
+        if symbol.endswith('-e'): symbol=symbol.split('-e')[0]
         instrument = Instrument.objects.filter(symbol=symbol).first()
         if not instrument:
             instrument = Instrument.objects.filter(name=symbol).first()

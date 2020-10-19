@@ -39,7 +39,6 @@ if startup:
 #   maintain_price_update()
 #   start_bots()
 
-
 API_TITLE = 'Pastebin API'
 API_DESCRIPTION = 'A Web API for creating and viewing highlighted code signals.'
 schema_view = get_schema_view(title=API_TITLE)
