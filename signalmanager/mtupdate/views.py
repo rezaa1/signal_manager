@@ -13,11 +13,17 @@ from signals.models import MessageRecord
 from telegram import bot
 from background_task import background
 from trades.apps import manage_trades
-from mtupdate.apps import get_standard_symbol
 import telegram
 import signals
 import sys
 #from config import telegram_token_news
+
+
+def get_standard_symbol(symbol):
+
+    rsymbol = symbol.split('-e')[0]
+
+    return(rsymbol)
 
 
 
