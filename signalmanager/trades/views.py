@@ -95,8 +95,8 @@ from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
 class SignalListView(ListView):
-    if not request.user.is_authenticated:
-        redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    if not self.request.user.is_authenticated:
+        redirect('%s?next=%s' % (self.settings.LOGIN_URL, self.request.path))
     
 
 
