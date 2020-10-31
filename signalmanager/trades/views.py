@@ -94,8 +94,16 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
+class SignalListView(ListView):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    
 
-class TradeListView(ListView):
+
+
+
+
+class TradeListView(SignalListView):
     model = Trade
 
 
@@ -115,7 +123,7 @@ class TradeUpdateView(UpdateView):
     form_class = TradeForm
 
 
-class BrokerListView(ListView):
+class BrokerListView(SignalListView):
     model = Broker
 
 
