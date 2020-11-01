@@ -94,6 +94,8 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
+from django.shortcuts import redirect
+
 class SignalListView(ListView):
     
     def dispatch(self, request, *args, **kwargs):
