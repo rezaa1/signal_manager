@@ -8,10 +8,6 @@ from signals import views
 
 from rest_framework.authtoken.views import ObtainAuthToken
 
-from django.contrib import admin
-from signals.models import Signal
-
-admin.site.register(Signal)
 
 
 # Create a router and register our viewsets with it.
