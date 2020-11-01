@@ -4,3 +4,6 @@ from django.confs.urls.defaults import *
 #one time startup
 #startup()
 
+from django.contrib import admin
+
+admin.site.register(oanda.models)
