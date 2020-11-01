@@ -95,6 +95,7 @@ from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
 from django.shortcuts import redirect
+from django.conf import settings
 
 class SignalListView(ListView):
     
