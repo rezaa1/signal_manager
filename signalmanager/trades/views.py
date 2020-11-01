@@ -102,7 +102,7 @@ class SignalListView(ListView):
     def dispatch(self, request, *args, **kwargs):
 
         if not self.request.user.is_authenticated:
-            return redirect('%s?next=%s' % (self.settings.LOGIN_URL, self.request.path))
+            return redirect('%s?next=%s' % (settings.LOGIN_URL, self.request.path))
         # if not request.user.is_anonymous and not request.user.is_superuser:
         #     return redirect("wiki:root")
         # if not settings.ACCOUNT_HANDLING:
