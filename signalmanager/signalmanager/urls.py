@@ -31,6 +31,12 @@ admin.site.site_title = "TradeManager Admin Portal"
 admin.site.index_title = "Welcome to TradeManager Portal"
 
 
+from django.apps import apps
+models = apps.get_models()
+for model in models:
+    admin.site.register(model)
+
+
 import sys
 startup=True
 if len(sys.argv) > 1:
