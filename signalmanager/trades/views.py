@@ -95,8 +95,22 @@ from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
 class SignalListView(ListView):
-    if not self.request.user.is_authenticated:
-        redirect('%s?next=%s' % (self.settings.LOGIN_URL, self.request.path))
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        if not self.request.user.is_authenticated:
+            return redirect('%s?next=%s' % (self.settings.LOGIN_URL, self.request.path))
+        # if not request.user.is_anonymous and not request.user.is_superuser:
+        #     return redirect("wiki:root")
+        # if not settings.ACCOUNT_HANDLING:
+        #     return redirect(settings.SIGNUP_URL)
+        # if not request.user.is_superuser and not settings.ACCOUNT_SIGNUP_ALLOWED:
+        #     c = {"error_msg": _("Account signup is only allowed for administrators.")}
+        #     return render(request, "wiki/error.html", context=c)
+
+        return super().dispatch(request, *args, **kwargs)
+
+
     
 
 
