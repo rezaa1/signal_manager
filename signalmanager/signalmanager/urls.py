@@ -32,6 +32,8 @@ admin.site.index_title = "Welcome to TradeManager Portal"
 
 
 from django.apps import apps
+models = apps.get_models()
+
 for model in models:
     try:
         admin.site.register(model)
