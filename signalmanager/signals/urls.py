@@ -7,6 +7,9 @@ from signals import views
 
 
 from rest_framework.authtoken.views import ObtainAuthToken
+
+
+
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'signals', views.SignalViewSet)

@@ -19,6 +19,13 @@ import sys
 #from config import telegram_token_news
 
 
+def get_standard_symbol(symbol):
+
+    rsymbol = symbol.split('-e')[0]
+
+    return(rsymbol)
+
+
 
 @api_view(['GET', 'POST'])
 def mtupdate_list(request):
@@ -33,7 +40,6 @@ def mtupdate_list(request):
 
     elif request.method == 'POST':
         try:
-            print("DBGGG view mtupdate post")
             signal = Signal.objects.get(owner=request.user,order_id=request.data['order_id'])
             serializer = SignalSerializer(signal, data=request.data)
             update=True
@@ -46,12 +52,11 @@ def mtupdate_list(request):
                order_update=generate_update(request=request.data,data=signal)
                message=generate_message(request=request.data,data=signal)
                serializer.save(owner=request.user)
-               print("DBG before gen message",signal.__dict__)
                manage_channels(signal.id,message,update)
                manage_trades(signal.id,update=order_update)
             else:
                message=generate_message(request=request.data,data=None)
-               serializer.save(owner=request.user)
+               serializer.save(owner=request.user,standard_symbol=get_standard_symbol(request.data['order_symbol']))
                signal = Signal.objects.get(owner=request.user,order_id=request.data['order_id'])
                manage_channels(signal.id,message,update)
                manage_trades(signal.id)

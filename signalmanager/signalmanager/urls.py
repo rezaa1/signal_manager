@@ -26,6 +26,20 @@ from django.contrib import admin
 # Register your models here.
 admin.autodiscover()
 
+admin.site.site_header = "TradeManager Admin"
+admin.site.site_title = "TradeManager Admin Portal"
+admin.site.index_title = "Welcome to TradeManager Portal"
+
+
+from django.apps import apps
+models = apps.get_models()
+
+for model in models:
+    try:
+        admin.site.register(model)
+    except admin.sites.AlreadyRegistered:
+        pass
+
 
 import sys
 startup=True
@@ -38,6 +52,7 @@ if startup:
 #   maintain_trades(repeat=600)
 #   maintain_price_update()
 #   start_bots()
+
 
 API_TITLE = 'Pastebin API'
 API_DESCRIPTION = 'A Web API for creating and viewing highlighted code signals.'

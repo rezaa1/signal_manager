@@ -94,113 +94,151 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import Trade, Broker, Strategy, AccountType, Account, Follower
 from .forms import TradeForm, BrokerForm, StrategyForm, AccountTypeForm, AccountForm, FollowerForm
 
+from django.shortcuts import redirect
+from django.conf import settings
 
-class TradeListView(ListView):
+class SignalListView(ListView):
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        if not self.request.user.is_authenticated:
+            return redirect('%s?next=%s' % (settings.LOGIN_URL, self.request.path))
+        return super().dispatch(request, *args, **kwargs)
+
+
+    
+class SignalCreateView(CreateView):
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        if not self.request.user.is_authenticated:
+            return redirect('%s?next=%s' % (settings.LOGIN_URL, self.request.path))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class SignalDetailView(DetailView):
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        if not self.request.user.is_authenticated:
+            return redirect('%s?next=%s' % (settings.LOGIN_URL, self.request.path))
+        return super().dispatch(request, *args, **kwargs)
+
+class SignalUpdateView(UpdateView):
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        if not self.request.user.is_authenticated:
+            return redirect('%s?next=%s' % (settings.LOGIN_URL, self.request.path))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class TradeListView(SignalListView):
     model = Trade
 
 
-class TradeCreateView(CreateView):
+class TradeCreateView(SignalCreateView):
     model = Trade
     form_class = TradeForm
     # if not request.user.is_authenticated:
     #     redirect('%s?next=%s' % ('/login/', request.path))
  
 
-class TradeDetailView(DetailView):
+class TradeDetailView(SignalDetailView):
     model = Trade
 
 
-class TradeUpdateView(UpdateView):
+class TradeUpdateView(SignalUpdateView):
     model = Trade
     form_class = TradeForm
 
 
-class BrokerListView(ListView):
+class BrokerListView(SignalListView):
     model = Broker
 
 
-class BrokerCreateView(CreateView):
-    model = Broker
-    form_class = BrokerForm
-
-
-class BrokerDetailView(DetailView):
-    model = Broker
-
-
-class BrokerUpdateView(UpdateView):
+class BrokerCreateView(SignalCreateView):
     model = Broker
     form_class = BrokerForm
 
 
-class StrategyListView(ListView):
+class BrokerDetailView(SignalDetailView):
+    model = Broker
+
+
+class BrokerUpdateView(SignalUpdateView):
+    model = Broker
+    form_class = BrokerForm
+
+
+class StrategyListView(SignalListView):
     model = Strategy
 #    data = serializers.serialize( "python", Strategy.objects.all() )
 
 
-class StrategyCreateView(CreateView):
+class StrategyCreateView(SignalCreateView):
     model = Strategy
     form_class = StrategyForm
 
 
-class StrategyDetailView(DetailView):
+class StrategyDetailView(SignalDetailView):
     model = Strategy
 
 
-class StrategyUpdateView(UpdateView):
+class StrategyUpdateView(SignalUpdateView):
     model = Strategy
     form_class = StrategyForm
 
 
-class AccountTypeListView(ListView):
+class AccountTypeListView(SignalListView):
     model = AccountType
 
 
-class AccountTypeCreateView(CreateView):
-    model = AccountType
-    form_class = AccountTypeForm
-
-
-class AccountTypeDetailView(DetailView):
-    model = AccountType
-
-
-class AccountTypeUpdateView(UpdateView):
+class AccountTypeCreateView(SignalCreateView):
     model = AccountType
     form_class = AccountTypeForm
 
 
-class AccountListView(ListView):
+class AccountTypeDetailView(SignalDetailView):
+    model = AccountType
+
+
+class AccountTypeUpdateView(SignalUpdateView):
+    model = AccountType
+    form_class = AccountTypeForm
+
+
+class AccountListView(SignalListView):
     model = Account
 
 
-class AccountCreateView(CreateView):
+class AccountCreateView(SignalCreateView):
     model = Account
     form_class = AccountForm
 
 
-class AccountDetailView(DetailView):
+class AccountDetailView(SignalDetailView):
     model = Account
 
 
-class AccountUpdateView(UpdateView):
+class AccountUpdateView(SignalUpdateView):
     model = Account
     form_class = AccountForm
 
 
-class FollowerListView(ListView):
+class FollowerListView(SignalListView):
     model = Follower
 
 
-class FollowerCreateView(CreateView):
+class FollowerCreateView(SignalCreateView):
     model = Follower
     form_class = FollowerForm
 
 
-class FollowerDetailView(DetailView):
+class FollowerDetailView(SignalDetailView):
     model = Follower
 
 
-class FollowerUpdateView(UpdateView):
+class FollowerUpdateView(SignalUpdateView):
     model = Follower
     form_class = FollowerForm

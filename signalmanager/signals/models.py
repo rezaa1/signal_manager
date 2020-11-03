@@ -42,6 +42,7 @@ class Signal(models.Model):
     order_id = models.TextField()
     order_symbol = models.TextField()
 #    order_type = models.CharField(choices=ORDER_TYPE, max_length=10)
+    standard_symbol = models.TextField(blank=True,null=True)
     order_type = models.CharField(max_length=10)
     order_stoploss = models.TextField(max_length=20,blank=True,null=True)
     order_price = models.TextField()
