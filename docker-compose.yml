@@ -22,10 +22,13 @@ services:
     build: ./signalmanager
     env_file:
       - ./.env
+    volumes:
+      - ./signalmanager:/usr/src/app:rw
 #    expose:
 #      - ${WEB_HTTP_INTERNAL}
     ports:
       - 127.0.0.1:${WEB_HTTP_PORT}:${WEB_HTTP_INTERNAL}
+    privileged: true
     depends_on:
       - db
 
@@ -36,6 +39,8 @@ services:
       dockerfile: Dockerfile-q
     env_file:
       - ./.env
+    volumes:
+      - ./database/:/var/lib/postgresql/data/
     depends_on:
       - web
       - db
@@ -44,6 +49,8 @@ services:
     build: 
       context: ./signalmanager
       dockerfile: Dockerfile-mnt
+    volumes:
+      - ./database/:/var/lib/postgresql/data/
     env_file:
       - ./.env
     depends_on:
