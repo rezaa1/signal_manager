@@ -56,7 +56,7 @@ def mtupdate_list(request):
                manage_trades(signal.id,update=order_update)
             else:
                message=generate_message(request=request.data,data=None)
-               serializer.save(owner=request.user,standard_symbol=get_standard_symbol(request.order_symbol))
+               serializer.save(owner=request.user,standard_symbol=get_standard_symbol(request.data['order_symbol']))
                signal = Signal.objects.get(owner=request.user,order_id=request.data['order_id'])
                manage_channels(signal.id,message,update)
                manage_trades(signal.id)
