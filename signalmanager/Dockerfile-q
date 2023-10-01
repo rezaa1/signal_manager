@@ -1,9 +1,9 @@
-FROM python:3
+FROM python:3.8.8
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /usr/src/app
 RUN apt update -y
 #RUN apt install gcc python3-dev musl-dev -y
-RUN apt install netcat wget gettext vim lsb-release -y
+RUN apt install netcat-traditional wget gettext vim lsb-release -y
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
 RUN apt update -y
