@@ -30,7 +30,7 @@ def get_standard_symbol(symbol):
 
 
 @api_view(['POST'])
-def signal_hook(request):
+def signal_hook(request._request):
     """
     List all code signals, or create a new signal.
     """
