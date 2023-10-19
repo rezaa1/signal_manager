@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'timer',
     'bootstrap4',
     'django_extensions',
-    'dbbackup'
+    'dbbackup',
+    'tradingview'
 ]
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}

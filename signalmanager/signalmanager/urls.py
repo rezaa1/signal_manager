@@ -63,6 +63,7 @@ urlpatterns = [
     url(r'^', include('timer.urls')),
     url(r'^', include('trades.urls')),
     url(r'^', include('signals.urls')),
+    url(r'^tv/', include('tradingview.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^schema/$', schema_view),
     url(r'^admin/', admin.site.urls),
