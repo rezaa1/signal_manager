@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from trades.apps import manage_trades
 
 class SignalHookView(APIView):
     """
@@ -39,4 +40,154 @@ class SignalHookView(APIView):
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@background(queue='channel-queue')
+def manage_channels(signal_id,message,update):
+    nl="\n"
+    
+    print("DBG_manage_channels_message1",message)
+    print("DBG_manage_channels update",update)
+    data= Signal.objects.get(pk=signal_id) 
+    owner=data.owner
+    signal_id=data.id
+    print("DBG_manage_channel_owner",owner)
+    # get bot
+    bot = Bot.objects.get(owner=owner)
+    # get list of channels for user
+    channels = Channel.objects.filter(owner=owner)
+
+    # find signal refrence in message id channel id  for each cannel
+    # send signal update for each channel
+    # save status
+    mid=0
+    for channel in channels:
+        print("DBG__channel",channel)
+        if update:
+            try:
+                messagerecord = MessageRecord.objects.get(channel=channel,signal=data,owner=owner) 
+                mid=messagerecord.message_id
+                midfound=True
+                print("DBG_manage_channel_update_mid10",mid)
+                mid, new =send_message(channel=channel.channel_id,token=bot.token,message=message,message_id=mid)   
+                if new:
+                    messagerecord.message_id= mid
+                    messagerecord.save()
+                print("DBG_manage_channel_update_mid11",mid)
+            except ObjectDoesNotExist:
+                print("DBG_manage_channel_update_exception20")
+                message="DELAYED "+generate_message(data.__dict__)+nl+message
+                mid=0
+                midfound=False
+                print("DBG_manage_channel_update_exception21")
+                mid, new =send_message(channel=channel.channel_id,token=bot.token,message=message)   
+                print("DBG_manage_channel_update_exception22")
+            except:
+                print("Unexpected error:", sys.exc_info()[0])
+        else:
+            try: 
+                print("DBG_manage_trying to get mid")
+                messagerecord = MessageRecord.objects.get(channel=channel,signal=data,owner=owner) 
+                mid=messagerecord.message_id
+                print("DBG_manage_trying to get mid is ",mid)
+                message="Repeating message as New:"+nl+message
+                midfound=True
+                print("DBG_manage_trying to send message ",message)
+                mid, new =send_message(channel=channel.channel_id,token=bot.token,message=message,message_id=mid)   
+                print("DBG_manage_sent message mid is",mid)
+            except ObjectDoesNotExist:
+                print("DBG_manage_new_",message)
+                mid, new =send_message(channel=channel.channel_id,token=bot.token,message=message)
+                midfound=False
+            except:
+                print("Unexpected error:", sys.exc_info()[0])
+
+        print("DBG_manage_channel_message",message)
+        if mid != 0 and midfound==False:
+            print("DBG_updating mid")
+            #print("MessageRecord(channel_id=",channel.channel_id,",signal_id=",signal_id,",message_id=",mid,") ")
+            #messagerecord = MessageRecord(channel_id=channel.channel_id,signal_id=signal_id,message_id=mid) 
+            messagerecord = MessageRecord(owner=owner,channel=channel,signal=data,message_id=mid) 
+            messagerecord.save()
+        
+def generate_message(request,data=None):
+    print("DBG_generate_message_request",request)
+    if data != None: print("DBG_generate_message_data",data.__dict__)
+    nl="\n"
+    ORDER_TYPE = ["BUY" , "SELL" ,"Pending Order BUY LIMIT" , "Pending Order SELL LIMIT" , "Pending Order BUY STOP", "Pending Order  SELL STOP" ]
+
+    if data == None:
+        message="SIGNAL:"+nl
+        message=message+ ORDER_TYPE[int(request['order_type'])] + " "+request['order_symbol'] + nl+ " AT: "  + request['order_price']  
+        if 'order_stoploss' in request:
+            message=message+ nl + " SL: " + request['order_stoploss'] 
+        if 'order_takeprofit' in request:
+            message=message+ nl + " TP: " + request['order_takeprofit']
+    else:
+        message="updating "
+        if 'order_stoploss' in request:
+            if data.order_stoploss != request['order_stoploss']:
+                message= message + "Move SL to: "+request['order_stoploss'] +nl
+        if 'order_takeprofit' in request:
+            if data.order_takeprofit != request['order_takeprofit']:
+                message= message + "Move TP to: "+request['order_takeprofit'] + nl
+        if data.order_price != request['order_price']:
+            message= message + "Move order price to: "+request['order_price'] + nl
+        if data.order_status != request['order_status']:
+            message= message + "status changed : " + request['order_status'] + nl
+        if data.order_type != request['order_type']:
+            message= message + "type changed : " + request['order_type'] +nl
+        if data.order_lot != request['order_lot']:
+            message= message + "size changed : " + request['order_lot']
+    print("DBGMESSAGE",message)
+    return(message)
+
+def generate_update(request,data):
+    res={}
+    print("DBG_generate_update_request",request)
+    if data == None: 
+        print("DBG_generate_message_data",data.__dict__)
+        print("ERROR DATA should not be None in gen update")
+    else:
+        if 'order_stoploss' in request:
+            if data.order_stoploss != request['order_stoploss']:
+                res.update(stoploss=request['order_stoploss'])
+        if 'order_takeprofit' in request:
+            if data.order_takeprofit != request['order_takeprofit']:
+                res.update(takeproffit=request['order_takeprofit'] )
+        
+        if data.order_price != request['order_price']:
+            res.update(price=request['order_price'])
+        if data.order_status != request['order_status']:
+            res.update(status=request['order_status'] )
+        if data.order_type != request['order_type']:
+            res.update(type=request['order_type'] )
+        if data.order_lot != request['order_lot']:
+            res.update(lot=request['order_lot'])
+    return(res)
+
+def send_message(channel,token,message,message_id=0):
+    print("sendmessage,channel:",channel,"token",token,"message",message,"message_id=",message_id)
+
+    new=False
+    bot = telegram.Bot(token=token)
+def send_message(channel,token,message,message_id=0):
+    print("sendmessage,channel:",channel,"token",token,"message",message,"message_id=",message_id)
+
+    new=False
+    bot = telegram.Bot(token=token)
+    if message_id == 0:
+        status = bot.send_message(chat_id=channel, text=message)
+        message_id=status.message_id
+        new = True
+    else:
+        try:
+            status = bot.send_message(chat_id=channel, text=message,reply_to_message_id=message_id)
+            new = False
+        except:
+            message = "Original MID " + message_id  + " not found \n " + messgae 
+            status = bot.send_message(chat_id=channel, text=message)
+            new = True
+            message_id=status.message_id
+             
+    return(message_id, new)
 
