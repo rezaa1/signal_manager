@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
+
 #
 from signals.models import Signal, Account
 from django.db.models import Exists,OuterRef
@@ -20,6 +22,8 @@ class SignalHookView(APIView):
     """
     List all code signals, or create a new signal.
     """
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         update = False
