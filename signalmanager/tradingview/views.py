@@ -1,7 +1,20 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+#
+from signals.models import Signal, Account
+from django.db.models import Exists,OuterRef
+from trades.models import Trade
+from signals.serializers import SignalSerializer,AccountSerializer
+from signals.models import Bot
+from signals.models import Channel
+from signals.models import MessageRecord
+from telegram import bot
+from background_task import background
 from trades.apps import manage_trades
+import telegram
+import signals
+import sys
 
 class SignalHookView(APIView):
     """
