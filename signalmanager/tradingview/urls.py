@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 
 
 urlpatterns = [
-    path('tv/hook', authentication_classes([])(permission_classes([AllowAny])(views.signal_hook)).as_view())
+    path('tv/hook', authentication_classes([])(permission_classes([AllowAny])(views.signal_hook)))
 ]
 
 
