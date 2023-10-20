@@ -18,6 +18,7 @@ import telegram
 import signals
 import sys
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 class SignalHookView(APIView):
     """
@@ -29,15 +30,33 @@ class SignalHookView(APIView):
     def post(self, request):
         print("DEBUGERROR:")
         print(request.data)
+        try:
+            user = User.objects.get(pk=request.data["user"])  # 'pk' stands for primary key, which is 'id' for the User model by default
+        except User.DoesNotExist:
+            print("User with specified ID does not exist.")
+
         if request.data["order_bs"] == "buy":
             request.data["order_type"]=1
         if request.data["order_bs"] == "sell":
             request.data["order_type"]=2
-        try:
-            user = User.objects.get(pk=request.data["user"])  # 'pk' stands for primary key, which is 'id' for the User model by default
-            print(user.username)
-        except User.DoesNotExist:
-            print("User with specified ID does not exist.")
+        if not request.data.get("order_id"):
+            if request.data["order_size"] != 0:
+                try:
+                    # Find the last used order_id in Signal table
+                    last_signal = Signal.objects.latest('order_id')
+                    last_order_id = last_signal.order_id
+                except ObjectDoesNotExist:
+                    last_order_id = 0  # Defaulting to 0 if no records found
+                request.data["order_id"]=last_order_id
+                request.data["order_status"]="Active"
+            else
+                #try:
+                signal = Signal.objects.get(owner=user, order_status="Active",order_strategy=request.data["strategy"])
+                request.data["order_id"]=signal.order_id
+                #except Signal.DoesNotExist:
+
+                    
+
 
         update = False
         try:
