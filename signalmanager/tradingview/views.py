@@ -49,7 +49,7 @@ class SignalHookView(APIView):
                     last_order_id = 0  # Defaulting to 0 if no records found
                 request.data["order_id"]=last_order_id
                 request.data["order_status"]="Active"
-            else
+            else:
                 #try:
                 signal = Signal.objects.get(owner=user, order_status="Active",order_strategy=request.data["strategy"])
                 request.data["order_id"]=signal.order_id
