@@ -17,6 +17,7 @@ from trades.apps import manage_trades
 import telegram
 import signals
 import sys
+from django.contrib.auth.models import User
 
 class SignalHookView(APIView):
     """
@@ -26,30 +27,42 @@ class SignalHookView(APIView):
     authentication_classes = []
 
     def post(self, request):
+        print("DEBUGERROR:")
+        print(request.data)
+        if request.data["order_bs"] == "buy":
+            request.data["order_type"]=1
+        if request.data["order_bs"] == "sell":
+            request.data["order_type"]=2
+        try:
+            user = User.objects.get(pk=request.data["user"])  # 'pk' stands for primary key, which is 'id' for the User model by default
+            print(user.username)
+        except User.DoesNotExist:
+            print("User with specified ID does not exist.")
+
         update = False
         try:
-            signal = Signal.objects.get(owner=request.user, order_id=request.data['order_id'])
+            signal = Signal.objects.get(owner=user, order_id=request.data["order_id"])
             serializer = SignalSerializer(signal, data=request.data)
             update = True
         except Signal.DoesNotExist:
-            if request.data.order_size != 0:
-                request.data.order_status = "Active"
+            if request.data["order_lot"] != 0:
+                request.data["order_status"] = "Active"
             serializer = SignalSerializer(data=request.data)
 
         if serializer.is_valid():
             if update:
                 # send_update(request.data, signal)
-                if request.data.order_size == 0:
-                    request.data.order_status = "Closed"
+                if request.data["order_lot"] == 0:
+                    request.data["order_status"] = "Closed"
                 order_update = generate_update(request=request.data, data=signal)
                 message = generate_message(request=request.data, data=signal)
-                serializer.save(owner=request.user)
+                serializer.save(owner=user)
                 manage_channels(signal.id, message, update)
                 manage_trades(signal.id, update=order_update)
             else:
                 message = generate_message(request=request.data, data=None)
-                serializer.save(owner=request.user, standard_symbol=get_standard_symbol(request.data['order_symbol']))
-                signal = Signal.objects.get(owner=request.user, order_id=request.data['order_id'])
+                serializer.save(owner=user, standard_symbol=request.data['order_symbol'])
+                signal = Signal.objects.get(owner=user, order_id=request.data['order_id'])
                 manage_channels(signal.id, message, update)
                 manage_trades(signal.id)
                 # id = send_update(request.data)
