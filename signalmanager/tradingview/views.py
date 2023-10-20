@@ -35,10 +35,6 @@ class SignalHookView(APIView):
         except User.DoesNotExist:
             print("User with specified ID does not exist.")
 
-        if request.data["order_bs"] == "buy":
-            request.data["order_type"]=1
-        if request.data["order_bs"] == "sell":
-            request.data["order_type"]=2
         if not request.data.get("order_id"):
             if request.data["order_size"] != 0:
                 try:
