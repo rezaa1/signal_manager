@@ -83,6 +83,7 @@ class SignalHookView(APIView):
                 serializer.save(owner=user)
                 print("DEBUGERROR: serializer.saved update")
                 manage_channels(signal.id, message, update)
+                print("DEBUGERROR: calling manage trades")
                 manage_trades(signal.id, update=order_update)
             else:
                 message = generate_message(request=request.data, data=None)
