@@ -16,7 +16,7 @@ class SignalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Signal
 #        fields = ('url', 'order_id', 'order_type', 'owner', 'order_symbol', 'order_stoploss', 'order_takeprofit', 'order_price' , 'order_lot')
-        fields = ('id', 'order_id', 'order_type', 'owner', 'order_symbol', 'order_stoploss', 'order_takeprofit', 'order_price' , 'order_lot','order_status','message_id','order_create_time','order_open_time','order_close_time','order_comment','standard_symbol')
+        fields = ('id', 'order_id', 'order_type', 'owner', 'order_symbol', 'order_stoploss', 'order_takeprofit', 'order_price' , 'order_lot','order_status','message_id','order_create_time','order_open_time','order_close_time','order_comment','standard_symbol','strategy')
 #        fields = ( 'id', 'order_id', 'order_type', 'owner' )
 
 

@@ -192,7 +192,7 @@ def generate_message(request,data=None):
         if data.order_status != request['order_status']:
             message= message + "status changed : " + request['order_status'] + nl
         if data.order_type != request['order_type']:
-            message= message + "type changed : " + request['order_type'] +nl
+            message= message + "type changed : " + str(request['order_type']) +nl
         if data.order_lot != request['order_lot']:
             message= message + "size changed : " + request['order_lot']
     print("DBGMESSAGE",message)
