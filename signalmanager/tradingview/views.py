@@ -36,7 +36,9 @@ class SignalHookView(APIView):
             print("User with specified ID does not exist.")
 
         if not request.data.get("order_id"):
-            if request.data["order_size"] != 0:
+            print("DEBUGERROR: order_id")
+            if request.data["order_lot"] != 0:
+                print("DEBUGERROR: order_lot !=0")
                 try:
                     # Find the last used order_id in Signal table
                     last_signal = Signal.objects.latest('order_id')
@@ -44,11 +46,17 @@ class SignalHookView(APIView):
                 except ObjectDoesNotExist:
                     last_order_id = 0  # Defaulting to 0 if no records found
                 request.data["order_id"]=last_order_id
+                if float(request.data["order_lot"]) > 0:
+                    request.data["order_type"]=0 # Buy
+                else:
+                    request.data["order_type"]=1 # Sell
                 request.data["order_status"]="Active"
             else:
                 #try:
-                signal = Signal.objects.get(owner=user, order_status="Active",order_strategy=request.data["strategy"])
+                signal = Signal.objects.get(owner=user, order_status="Active")
                 request.data["order_id"]=signal.order_id
+                request.data["order_type"]=signal.order_type
+                request.data["order_status"]="Closed"
                 #except Signal.DoesNotExist:
 
                     
@@ -65,6 +73,7 @@ class SignalHookView(APIView):
             serializer = SignalSerializer(data=request.data)
 
         if serializer.is_valid():
+            print("DEBUGERROR: serializer.is_valid")
             if update:
                 # send_update(request.data, signal)
                 if request.data["order_lot"] == 0:
@@ -72,14 +81,17 @@ class SignalHookView(APIView):
                 order_update = generate_update(request=request.data, data=signal)
                 message = generate_message(request=request.data, data=signal)
                 serializer.save(owner=user)
+                print("DEBUGERROR: serializer.saved update")
                 manage_channels(signal.id, message, update)
                 manage_trades(signal.id, update=order_update)
             else:
                 message = generate_message(request=request.data, data=None)
                 serializer.save(owner=user, standard_symbol=request.data['order_symbol'])
+                print("DEBUGERROR: serializer.saved new")
                 signal = Signal.objects.get(owner=user, order_id=request.data['order_id'])
                 manage_channels(signal.id, message, update)
                 manage_trades(signal.id)
+                print("DEBUGERROR: manage trade called")
                 # id = send_update(request.data)
                 # serializer.save(owner=request.user, message_id=id)
 

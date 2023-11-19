@@ -55,7 +55,6 @@ class Signal(models.Model):
     order_status = models.CharField(default='',max_length=10,choices=ORDER_STATUS_CHOICES)
     message_id = models.TextField(default='0')
     order_comment = models.CharField(max_length=100, blank=True, default='')
-    strategy = models.CharField(max_length=100, blank=True, default='')
 
     channel_type_free = models.CharField(default='FREE',max_length=10,choices=CHANNEL_TYPE_CHOICES )
     channel_type_paid = models.CharField(default='',max_length=10,choices=CHANNEL_TYPE_CHOICES)
