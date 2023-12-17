@@ -66,7 +66,7 @@ def loadInstrumentData():
     token="49c5202adb5df9765e22853e7e70ad72-98c509e564a7cc536d3e84f53f3ca06a"
     account="101-001-8394451-003"
     
-    client = oandapyV20.API(access_token=token,environment="live")
+    client = oandapyV20.API(access_token=token,environment="practice")
     params = {}
     r = accounts.AccountInstruments(accountID=account, params=params)
     client.request(r)
