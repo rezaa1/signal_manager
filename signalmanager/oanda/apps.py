@@ -63,8 +63,8 @@ class OandaConfig(AppConfig):
 
 
 def loadInstrumentData():
-    token="664669077a8d4ce342d4e0f7e9917d72-c0303c5cbb6a57ba12db93df848773e5"
-    account="001-011-1957873-006"
+    token="49c5202adb5df9765e22853e7e70ad72-98c509e564a7cc536d3e84f53f3ca06a"
+    account="101-001-8394451-003"
     
     client = oandapyV20.API(access_token=token,environment="live")
     params = {}
